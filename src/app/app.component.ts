@@ -524,12 +524,13 @@ export class AppComponent implements OnInit, OnDestroy {
       en: 'GitHub',
     },
 
-    // ESTUDIOS
+        // ESTUDIOS
     'about.studies.title': {
       es: 'Formación académica',
       ca: 'Formació acadèmica',
       en: 'Education',
     },
+
     'about.studies.criminology.title': {
       es: 'Grado en Criminología',
       ca: 'Grau en Criminologia',
@@ -540,6 +541,12 @@ export class AppComponent implements OnInit, OnDestroy {
       ca: 'Base jurídica i criminològica que m’ajuda a entendre el factor humà, la seguretat i el compliment normatiu.',
       en: 'Legal and criminology background that helps me understand the human factor, security and compliance.',
     },
+    'about.studies.criminology.progress': {
+      es: 'Completado',
+      ca: 'Completat',
+      en: 'Completed',
+    },
+
     'about.studies.master.title': {
       es: 'Máster en Derecho Penal',
       ca: 'Màster en Dret Penal',
@@ -550,6 +557,12 @@ export class AppComponent implements OnInit, OnDestroy {
       ca: 'Aprofundiment en el marc legal, anàlisi de riscos i una visió rigorosa de la seguretat.',
       en: 'Deep dive into legal frameworks, risk analysis and a rigorous approach to security.',
     },
+    'about.studies.master.progress': {
+      es: 'Completado',
+      ca: 'Completat',
+      en: 'Completed',
+    },
+
     'about.studies.dam.title': {
       es: 'CFGS DAM · Desarrollo de Aplicaciones Multiplataforma',
       ca: 'CFGS DAM · Desenvolupament d’Aplicacions Multiplataforma',
@@ -560,6 +573,12 @@ export class AppComponent implements OnInit, OnDestroy {
       ca: 'Fonaments sòlids de programació orientada a objectes, bases de dades i apps d’escriptori/mòbil.',
       en: 'Solid foundations in OOP, databases and desktop/mobile applications.',
     },
+    'about.studies.dam.progress': {
+      es: 'Completado',
+      ca: 'Completat',
+      en: 'Completed',
+    },
+
     'about.studies.asir.title': {
       es: 'CFGS ASIR · Administración de Sistemas Informáticos en Red',
       ca: 'CFGS ASIR · Administració de Sistemes Informàtics en Xarxa',
@@ -570,6 +589,29 @@ export class AppComponent implements OnInit, OnDestroy {
       ca: 'Administració de sistemes, xarxes, seguretat i serveis que complementen el meu perfil de desenvolupador.',
       en: 'Systems, networking, security and services that complement my developer profile.',
     },
+    'about.studies.asir.progress': {
+      es: 'En curso',
+      ca: 'Actualment en curs',
+      en: 'Currently taking',
+    },
+
+    // 🔐 Curso reciente de ciberseguridad
+    'about.studies.cyber.title': {
+      es: 'Curso online de Ciberseguridad y Defensa Digital',
+      ca: 'Curs online de Ciberseguretat i Defensa Digital',
+      en: 'Online Course in Cybersecurity & Digital Defence',
+    },
+    'about.studies.cyber.body': {
+      es: 'Enfoque práctico en amenazas actuales, hardening de sistemas Windows, MFA, gestión de identidades y buenas prácticas de blue team.',
+      ca: 'Enfoc pràctic en amenaces actuals, hardening de sistemes Windows, MFA, gestió d’identitats i bones pràctiques de blue team.',
+      en: 'Hands-on focus on current threats, Windows hardening, MFA, identity management and blue-team best practices.',
+    },
+    'about.studies.cyber.progress': {
+      es: 'En curso',
+      ca: 'En curs',
+      en: 'In progress',
+    },
+
 
     // EXPERIENCIA
     'exp.meibit.title': {

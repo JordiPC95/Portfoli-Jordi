@@ -455,13 +455,14 @@
         </div>
       </div>
 
-      <!-- Formación académica -->
+            <!-- Formación académica · timeline vertical -->
       <div class="mt-10">
         <h3 class="text-lg font-semibold mb-4">
           {{ t('about.studies.title') }}
         </h3>
-        <div class="grid gap-4 md:grid-cols-2">
-          <!-- Criminología -->
+
+        <div class="flex flex-col gap-3">
+          <!-- 🧱 Más reciente: Curso de Ciberseguridad -->
           <article
             class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
             [ngClass]="{
@@ -470,19 +471,29 @@
             }"
           >
             <div
-              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-500/15 via-sky-500/5 to-emerald-500/15"
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-emerald-500/15 via-sky-500/5 to-purple-500/15"
             ></div>
             <div class="relative space-y-2">
               <h4 class="text-sm font-semibold">
-                {{ t('about.studies.criminology.title') }}
+                {{ t('about.studies.cyber.title') }}
               </h4>
               <p class="text-xs">
-                {{ t('about.studies.criminology.body') }}
+                {{ t('about.studies.cyber.body') }}
               </p>
+
+              <!-- Progreso -->
+              <div class="mt-2">
+                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                  <span>{{ t('about.studies.cyber.progress') }}</span>
+                </div>
+                <div class="mt-1 h-1.5 w-full rounded-full bg-slate-800/30">
+                  <div class="h-full rounded-full bg-emerald-400" style="width: 10%"></div>
+                </div>
+              </div>
             </div>
           </article>
 
-          <!-- Máster Derecho Penal -->
+          <!-- ASIR (actual, casi terminado) -->
           <article
             class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
             [ngClass]="{
@@ -491,15 +502,24 @@
             }"
           >
             <div
-              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duración-300 bg-gradient-to-br from-rose-500/15 via-sky-500/5 to-amber-500/15"
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-emerald-500/15 via-sky-500/5 to-indigo-500/15"
             ></div>
             <div class="relative space-y-2">
               <h4 class="text-sm font-semibold">
-                {{ t('about.studies.master.title') }}
+                {{ t('about.studies.asir.title') }}
               </h4>
               <p class="text-xs">
-                {{ t('about.studies.master.body') }}
+                {{ t('about.studies.asir.body') }}
               </p>
+
+              <div class="mt-2">
+                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                  <span>{{ t('about.studies.asir.progress') }}</span>
+                </div>
+                <div class="mt-1 h-1.5 w-full rounded-full bg-slate-800/30">
+                  <div class="h-full rounded-full bg-emerald-400" style="width: 85%"></div>
+                </div>
+              </div>
             </div>
           </article>
 
@@ -521,10 +541,19 @@
               <p class="text-xs">
                 {{ t('about.studies.dam.body') }}
               </p>
+
+              <div class="mt-2">
+                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                  <span>{{ t('about.studies.dam.progress') }}</span>
+                </div>
+                <div class="mt-1 h-1.5 w-full rounded-full bg-slate-800/30">
+                  <div class="h-full rounded-full bg-emerald-400" style="width: 100%"></div>
+                </div>
+              </div>
             </div>
           </article>
 
-          <!-- ASIR -->
+          <!-- Máster Derecho Penal -->
           <article
             class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
             [ngClass]="{
@@ -533,19 +562,59 @@
             }"
           >
             <div
-              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-emerald-500/15 via-sky-500/5 to-indigo-500/15"
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-rose-500/15 via-sky-500/5 to-amber-500/15"
             ></div>
             <div class="relative space-y-2">
               <h4 class="text-sm font-semibold">
-                {{ t('about.studies.asir.title') }}
+                {{ t('about.studies.master.title') }}
               </h4>
               <p class="text-xs">
-                {{ t('about.studies.asir.body') }}
+                {{ t('about.studies.master.body') }}
               </p>
+
+              <div class="mt-2">
+                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                  <span>{{ t('about.studies.master.progress') }}</span>
+                </div>
+                <div class="mt-1 h-1.5 w-full rounded-full bg-slate-800/30">
+                  <div class="h-full rounded-full bg-emerald-400" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Criminología (más antigua, al fondo de la pila) -->
+          <article
+            class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
+          >
+            <div
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-500/15 via-sky-500/5 to-emerald-500/15"
+            ></div>
+            <div class="relative space-y-2">
+              <h4 class="text-sm font-semibold">
+                {{ t('about.studies.criminology.title') }}
+              </h4>
+              <p class="text-xs">
+                {{ t('about.studies.criminology.body') }}
+              </p>
+
+              <div class="mt-2">
+                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                  <span>{{ t('about.studies.criminology.progress') }}</span>
+                </div>
+                <div class="mt-1 h-1.5 w-full rounded-full bg-slate-800/30">
+                  <div class="h-full rounded-full bg-emerald-400" style="width: 100%"></div>
+                </div>
+              </div>
             </div>
           </article>
         </div>
       </div>
+
     </section>
 
     <!-- EXPERIENCIA -->
