@@ -1,0 +1,214 @@
+/* Tarjeta del hero (vertical) */
+/* Tarjeta del hero (vertical) */
+.hero-card {
+  height: 420px;        /* da altura fija al contenedor */
+  max-height: 480px;
+}
+
+
+/* Scroll fino en los modales */
+.modal-body-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
+}
+
+.modal-body-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.8);
+  border-radius: 9999px;
+}
+
+/* El iframe del mapa ocupa todo el espacio de su contenedor (ya controlado por Tailwind) */
+iframe {
+  display: block;
+}
+
+/* ==================== BACKGROUND ORBS ANIMADOS ==================== */
+@keyframes orbDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(30px, -24px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes orbDriftReverse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-26px, 20px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animated-orb {
+    will-change: transform;
+    filter: blur(40px);
+  }
+
+  .orb-slow {
+    animation: orbDrift 26s ease-in-out infinite;
+  }
+
+  .orb-medium {
+    animation: orbDrift 20s ease-in-out infinite;
+  }
+
+  .orb-reverse {
+    animation: orbDriftReverse 24s ease-in-out infinite;
+  }
+}
+
+/* ==================== GALERÍA FLOTANTE ==================== */
+.gallery-frame {
+  transform-origin: center;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.gallery-frame:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 26px 90px rgba(56, 189, 248, 0.45);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes floatSlow {
+    0% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-4px) scale(1.005);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .gallery-frame {
+    animation: floatSlow 18s ease-in-out infinite;
+  }
+}
+
+/* ==================== GLOW ANIMADO EN HERO ==================== */
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1.5rem;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.45), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.45), transparent 60%),
+    radial-gradient(circle at 50% 0%, rgba(251, 191, 36, 0.3), transparent 60%);
+  opacity: 0.75;
+  z-index: -1;
+  filter: blur(18px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes heroPulse {
+    0% {
+      opacity: 0.65;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+    100% {
+      opacity: 0.65;
+      transform: scale(1);
+    }
+  }
+
+  .hero-glow::before {
+    animation: heroPulse 12s ease-in-out infinite;
+  }
+
+  .hero-glow:hover::before {
+    animation-duration: 7s;
+  }
+}
+
+/* ================= CONTACT: QR CARD ================== */
+
+.contact-qr-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  padding: 0.85rem 1.05rem;
+  background:
+    radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.2), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.18), transparent 55%);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+}
+
+.contact-qr-wrapper {
+  position: relative;
+  width: 185px;     /* antes 84px */
+  height: 185px;    /* antes 84px */
+  border-radius: 0.9rem;
+  padding: 10px;    /* un poco más de padding para que respire */
+  background:
+    radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.9), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.9), transparent 60%);
+}
+
+.contact-qr-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.7rem;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9); /* un pelín más de presencia */
+}
+
+
+.contact-qr-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  border: 1px dashed rgba(15, 23, 42, 0.5);
+  opacity: 0.7;
+}
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes qrBreath {
+    0% {
+      transform: translateY(0) scale(1);
+      box-shadow: 0 0 0 rgba(56, 189, 248, 0.35);
+    }
+    50% {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 26px rgba(56, 189, 248, 0.55);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      box-shadow: 0 0 0 rgba(56, 189, 248, 0.35);
+    }
+  }
+
+  .contact-qr-wrapper {
+    animation: qrBreath 6s ease-in-out infinite;
+  }
+}

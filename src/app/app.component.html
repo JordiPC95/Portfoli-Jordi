@@ -1,336 +1,1428 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div
+  class="min-h-screen relative overflow-hidden transition-colors duration-300"
+  [ngClass]="{
+    'bg-slate-950 text-slate-100': isDark,
+    'bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-100 text-slate-900': !isDark
+  }"
+>
+  <!-- Background blobs de colores -->
+<div class="pointer-events-none fixed inset-0 -z-10">
+  <div
+    class="absolute -top-40 -left-40 h-80 w-80 rounded-full bg-purple-500/30 blur-3xl animated-orb orb-slow"
+  ></div>
+  <div
+    class="absolute top-40 -right-32 h-96 w-96 rounded-full bg-cyan-500/25 blur-3xl animated-orb orb-reverse"
+  ></div>
+  <div
+    class="absolute bottom-0 left-1/2 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full bg-emerald-500/20 blur-3xl animated-orb orb-medium"
+  ></div>
 
-<style>
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
+  <div
+    class="absolute inset-0 opacity-[0.12] mix-blend-soft-light bg-[radial-gradient(circle_at_top,_#22d3ee_0,_transparent_55%),radial-gradient(circle_at_bottom,_#a855f7_0,_transparent_55%)]"
+  ></div>
+</div>
 
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
 
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
-
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
-
-    --pill-accent: var(--bright-blue);
-
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 500;
-    line-height: 100%;
-    letter-spacing: -0.125rem;
-    margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-  }
-
-  p {
-    margin: 0;
-    color: var(--gray-700);
-  }
-
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
-
-  .angular-logo {
-    max-width: 9.2rem;
-  }
-
-  .content {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 3rem;
-  }
-
-  .content h1 {
-    margin-top: 1.75rem;
-  }
-
-  .content p {
-    margin-top: 1.5rem;
-  }
-
-  .divider {
-    width: 1px;
-    background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
-  }
-
-  .pill-group {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-  }
-
-  .pill {
-    display: flex;
-    align-items: center;
-    --pill-accent: var(--bright-blue);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
-    color: var(--pill-accent);
-    padding-inline: 0.75rem;
-    padding-block: 0.375rem;
-    border-radius: 2.75rem;
-    border: 0;
-    transition: background 0.3s ease;
-    font-family: var(--inter-font);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.4rem;
-    letter-spacing: -0.00875rem;
-    text-decoration: none;
-  }
-
-  .pill:hover {
-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
-  }
-
-  .pill-group .pill:nth-child(6n + 1) {
-    --pill-accent: var(--bright-blue);
-  }
-  .pill-group .pill:nth-child(6n + 2) {
-    --pill-accent: var(--french-violet);
-  }
-  .pill-group .pill:nth-child(6n + 3),
-  .pill-group .pill:nth-child(6n + 4),
-  .pill-group .pill:nth-child(6n + 5) {
-    --pill-accent: var(--hot-red);
-  }
-
-  .pill-group svg {
-    margin-inline-start: 0.25rem;
-  }
-
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: 0.73rem;
-    margin-top: 1.5rem;
-  }
-
-  .social-links path {
-    transition: fill 0.3s ease;
-    fill: var(--gray-400);
-  }
-
-  .social-links a:hover svg path {
-    fill: var(--gray-900);
-  }
-
-  @media screen and (max-width: 650px) {
-    .content {
-      flex-direction: column;
-      width: max-content;
-    }
-
-    .divider {
-      height: 1px;
-      width: 100%;
-      background: var(--red-to-pink-to-purple-horizontal-gradient);
-      margin-block: 1.5rem;
-    }
-  }
-</style>
-
-<main class="main">
-  <div class="content">
-    <div class="left-side">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 982 239"
-        fill="none"
-        class="angular-logo"
-      >
-        <g clip-path="url(#a)">
-          <path
-            fill="url(#b)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-          <path
-            fill="url(#c)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-        </g>
-        <defs>
-          <radialGradient
-            id="c"
-            cx="0"
-            cy="0"
-            r="1"
-            gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#FF41F8" />
-            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
-            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
-          </radialGradient>
-          <linearGradient
-            id="b"
-            x1="0"
-            x2="982"
-            y1="192"
-            y2="192"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#F0060B" />
-            <stop offset="0" stop-color="#F0070C" />
-            <stop offset=".526" stop-color="#CC26D5" />
-            <stop offset="1" stop-color="#7702FF" />
-          </linearGradient>
-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
-        </defs>
-      </svg>
-      <h1>Hello, {{ title }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
-    </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-      <div class="pill-group">
-        @for (item of [
-          { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
-        ]; track item.title) {
-          <a
-            class="pill"
-            [href]="item.link"
-            target="_blank"
-            rel="noopener"
-          >
-            <span>{{ item.title }}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="14"
-              viewBox="0 -960 960 960"
-              width="14"
-              fill="currentColor"
-            >
-              <path
-                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
-              />
-            </svg>
-          </a>
-        }
+  <!-- NAVBAR -->
+  <header
+    class="sticky top-0 z-30 backdrop-blur-xl border-b transition-colors duration-300"
+    [ngClass]="{
+      'border-slate-800/60 bg-slate-950/70': isDark,
+      'border-slate-200/80 bg-white/75 shadow-sm': !isDark
+    }"
+  >
+    <nav class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <div
+          class="h-8 w-8 rounded-xl bg-gradient-to-tr from-cyan-400 via-purple-500 to-fuchsia-500 flex items-center justify-center text-xs font-bold shadow-md"
+        >
+          JP
+        </div>
+        <div class="flex flex-col leading-tight">
+          <span class="text-sm font-semibold tracking-tight">Jordi Prunell</span>
+          <span class="text-[11px] text-slate-400">Full Stack · IT &amp; Systems</span>
+        </div>
       </div>
-      <div class="social-links">
-        <a
-          href="https://github.com/angular/angular"
-          aria-label="Github"
-          target="_blank"
-          rel="noopener"
+
+      <!-- Menú escritorio -->
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <button class="hover:text-cyan-400 transition-colors" (click)="scrollTo('hero')">
+          {{ t('nav.home') }}
+        </button>
+        <button class="hover:text-cyan-400 transition-colors" (click)="scrollTo('about')">
+          {{ t('nav.about') }}
+        </button>
+        <button class="hover:text-cyan-400 transition-colors" (click)="scrollTo('experience')">
+          {{ t('nav.experience') }}
+        </button>
+        <button class="hover:text-cyan-400 transition-colors" (click)="scrollTo('skills')">
+          {{ t('nav.skills') }}
+        </button>
+        <button class="hover:text-cyan-400 transition-colors" (click)="scrollTo('projects')">
+          {{ t('nav.projects') }}
+        </button>
+        <button class="hover:text-cyan-400 transition-colors" (click)="scrollTo('contact')">
+          {{ t('nav.contact') }}
+        </button>
+
+        <!-- Toggle tema escritorio -->
+        <button
+          class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-medium transition-all"
+          [ngClass]="{
+            'border-slate-700/80 text-slate-200 hover:border-cyan-400 hover:text-cyan-300': isDark,
+            'border-slate-300 text-slate-700 hover:border-cyan-500 hover:text-cyan-600': !isDark
+          }"
+          (click)="toggleTheme()"
         >
-          <svg
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Github"
+          <span *ngIf="isDark">🌙</span>
+          <span *ngIf="!isDark">☀️</span>
+          <span class="hidden sm:inline">
+            {{ isDark ? t('theme.dark') : t('theme.light') }}
+          </span>
+        </button>
+
+        <!-- Idiomas escritorio -->
+        <div class="flex items-center gap-1 ml-2">
+          <button
+            *ngFor="let lang of languages"
+            (click)="setLang(lang.code)"
+            class="h-7 w-10 flex items-center justify-center rounded-full border text-[0] overflow-hidden transition-all"
+            [ngClass]="{
+              'border-slate-600 ring-2 ring-cyan-400/70 shadow-md shadow-cyan-500/40':
+                currentLang === lang.code && isDark,
+              'border-slate-300 ring-2 ring-cyan-500/60 shadow-md shadow-cyan-500/30':
+                currentLang === lang.code && !isDark,
+              'border-transparent opacity-60 hover:opacity-100':
+                currentLang !== lang.code
+            }"
           >
-            <path
-              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
+            <img
+              [src]="lang.flag"
+              [alt]="lang.label"
+              class="h-4 w-6 object-cover rounded-sm"
             />
-          </svg>
-        </a>
-        <a
-          href="https://twitter.com/angular"
-          aria-label="Twitter"
-          target="_blank"
-          rel="noopener"
+          </button>
+        </div>
+      </div>
+
+      <!-- Botón menú móvil -->
+      <button
+        class="md:hidden inline-flex items-center justify-center rounded-lg border px-2 py-1 text-xs transition-all"
+        [ngClass]="{
+          'border-slate-700/80 text-slate-200 hover:border-cyan-400 hover:text-cyan-300': isDark,
+          'border-slate-300 text-slate-700 hover:border-cyan-500 hover:text-cyan-600': !isDark
+        }"
+        (click)="toggleNav()"
+      >
+        <span *ngIf="!navOpen">{{ t('nav.menuOpen') }}</span>
+        <span *ngIf="navOpen">{{ t('nav.menuClose') }}</span>
+      </button>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div
+      *ngIf="navOpen"
+      class="md:hidden border-t transition-colors duration-300"
+      [ngClass]="{
+        'border-slate-800/60 bg-slate-950/95': isDark,
+        'border-slate-200 bg-white/95 shadow-sm': !isDark
+      }"
+    >
+      <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <button class="text-left py-1 hover:text-cyan-400" (click)="scrollTo('hero')">
+          {{ t('nav.home') }}
+        </button>
+        <button class="text-left py-1 hover:text-cyan-400" (click)="scrollTo('about')">
+          {{ t('nav.about') }}
+        </button>
+        <button class="text-left py-1 hover:text-cyan-400" (click)="scrollTo('experience')">
+          {{ t('nav.experience') }}
+        </button>
+        <button class="text-left py-1 hover:text-cyan-400" (click)="scrollTo('skills')">
+          {{ t('nav.skills') }}
+        </button>
+        <button class="text-left py-1 hover:text-cyan-400" (click)="scrollTo('projects')">
+          {{ t('nav.projects') }}
+        </button>
+        <button class="text-left py-1 hover:text-cyan-400" (click)="scrollTo('contact')">
+          {{ t('nav.contact') }}
+        </button>
+
+        <!-- Tema + idiomas móvil -->
+        <div class="mt-3 flex items-center justify-between">
+          <button
+            class="flex items-center gap-2 text-left py-1 text-xs"
+            (click)="toggleTheme()"
+            [ngClass]="{
+              'text-slate-300 hover:text-cyan-300': isDark,
+              'text-slate-700 hover:text-cyan-600': !isDark
+            }"
+          >
+            <span *ngIf="isDark">🌙</span>
+            <span *ngIf="!isDark">☀️</span>
+            <span>
+              {{ isDark ? t('theme.switchToLight') : t('theme.switchToDark') }}
+            </span>
+          </button>
+
+          <div class="flex items-center gap-1">
+            <button
+              *ngFor="let lang of languages"
+              (click)="setLang(lang.code)"
+              class="h-7 w-10 flex items-center justify-center rounded-full border text-[0] overflow-hidden transition-all"
+              [ngClass]="{
+                'border-slate-600 ring-2 ring-cyan-400/70 shadow-md shadow-cyan-500/40':
+                  currentLang === lang.code && isDark,
+                'border-slate-300 ring-2 ring-cyan-500/60 shadow-md shadow-cyan-500/30':
+                  currentLang === lang.code && !isDark,
+                'border-transparent opacity-60 hover:opacity-100':
+                  currentLang !== lang.code
+              }"
+            >
+              <img
+                [src]="lang.flag"
+                [alt]="lang.label"
+                class="h-4 w-6 object-cover rounded-sm"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="max-w-5xl mx-auto px-4 pb-24">
+    <!-- HERO -->
+    <section id="hero" appAos class="min-h-[70vh] flex flex-col justify-center py-8">
+      <div class="grid gap-10 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] items-center">
+        <!-- Lado izquierdo: texto -->
+        <div class="relative flex flex-col gap-8">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs w-fit transition-colors duration-300"
+            [ngClass]="{
+              'border-slate-700 bg-slate-900/70 text-slate-300': isDark,
+              'border-slate-300 bg-white/80 text-slate-700': !isDark
+            }"
+          >
+            <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            {{ t('hero.available') }}
+          </div>
+
+          <div class="space-y-6">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+              <span
+                class="block"
+                [ngClass]="{ 'text-slate-200': isDark, 'text-slate-900': !isDark }"
+              >
+                {{ t('hero.hello') }}
+              </span>
+              <span
+                class="block bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent"
+              >
+                Jordi Prunell
+              </span>
+            </h1>
+
+            <p
+              class="max-w-xl text-sm sm:text-base"
+              [ngClass]="{ 'text-slate-300': isDark, 'text-slate-700': !isDark }"
+            >
+              {{ t('hero.introBeforeHighlight') }}
+              <span
+                class="font-semibold"
+                [ngClass]="{ 'text-slate-100': isDark, 'text-slate-900': !isDark }"
+              >
+                Full Stack .NET &amp; Angular
+              </span>
+              {{ t('hero.introAfterHighlight') }}
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <!-- Descargar CV -->
+              <a
+                [href]="cvUrl"
+                download
+                target="_blank"
+                rel="noreferrer"
+                class="rounded-xl bg-emerald-400 px-5 py-2.5 text-sm font-medium text-slate-950 shadow-lg shadow-emerald-400/40 hover:bg-emerald-300 active:scale-[0.98] transition-all"
+              >
+                {{ t('hero.downloadCv') }}
+              </a>
+
+              <button
+                (click)="scrollTo('projects')"
+                class="rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-medium text-slate-950 shadow-lg shadow-cyan-500/30 hover:bg-cyan-400 active:scale-[0.98] transition-all"
+              >
+                {{ t('hero.ctaProjects') }}
+              </button>
+
+              <button
+                (click)="scrollTo('experience')"
+                class="rounded-xl border px-5 py-2.5 text-sm font-medium transition-all"
+                [ngClass]="{
+                  'border-slate-700 text-slate-100 hover:border-cyan-400 hover:text-cyan-300': isDark,
+                  'border-slate-300 text-slate-800 hover:border-cyan-500 hover:text-cyan-600': !isDark
+                }"
+              >
+                {{ t('hero.ctaExperience') }}
+              </button>
+            </div>
+          </div>        
+        </div>
+
+        <!-- Lado derecho: foto 3D (solo VERTICALES) -->
+        <div
+          class="relative group mt-4 md:mt-0"
+          (mousemove)="onHeroMouseMove($event)"
+          (mouseleave)="resetHeroTilt()"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Twitter"
-          >
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
-          aria-label="Youtube"
-          target="_blank"
-          rel="noopener"
+          <!-- Glow exterior -->
+          <div
+            class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-amber-400 opacity-60 blur-xl group-hover:opacity-90 transition-opacity duration-500"
+          ></div>
+
+          <!-- Marco -->
+          <div
+  class="relative overflow-hidden rounded-3xl border shadow-xl transition-transform duration-300 hero-card hero-glow"
+  [ngClass]="{
+    'border-slate-700 bg-slate-900/80': isDark,
+    'border-slate-200 bg-slate-900': !isDark
+  }"
+  [ngStyle]="{ transform: heroCardTransform }"
+>
+
+            <!-- Chips sobre la imagen -->
+            <div
+              class="absolute top-3 left-3 rounded-full bg-black/60 text-[10px] text-slate-100 px-3 py-1 flex items-center gap-1 backdrop-blur"
+            >
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+              <span>Full Stack · IT · Cyber</span>
+            </div>
+            <div
+              class="absolute top-3 right-3 rounded-full bg-black/50 text-[10px] text-slate-100 px-3 py-1 backdrop-blur"
+            >
+              Tech events · Cloud · Security
+            </div>
+
+            <!-- Imágenes superpuestas (VERTICALES) -->
+            <div class="relative w-full h-full bg-black">
+              <img
+                *ngFor="let img of heroImages; let i = index"
+                [src]="img"
+                [attr.alt]="i === 0 ? t('hero.photo.devAlt') : t('hero.photo.portraitAlt')"
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+                [class.opacity-100]="currentHeroImageIndex === i"
+                [class.opacity-0]="currentHeroImageIndex !== i"
+              />
+            </div>
+
+            <!-- Cintillo inferior -->
+            <div
+              class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 pb-3 pt-6 flex items-center justify-between text-[11px] text-slate-100"
+            >
+              <div class="flex flex-col">
+                <span class="font-semibold tracking-wide">
+                  {{ t('hero.ribbon.bottomTitle') }}
+                </span>
+                <span class="text-[10px] text-slate-300">
+                  {{ t('hero.ribbon.bottomSubtitle') }}
+                </span>
+              </div>
+              <div class="flex items-center gap-1 text-[10px]">
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>{{ t('hero.ribbon.bottomStatus') }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjetas resumen -->
+      <div class="grid gap-4 sm:grid-cols-3 mt-10">
+        <div
+          class="rounded-2xl border px-4 py-3 text-xs transition-colors duration-300"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
+            'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+          }"
         >
-          <svg
-            width="29"
-            height="20"
-            viewBox="0 0 29 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Youtube"
+          <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+            {{ t('summary.stackTitle') }}
+          </p>
+          <p>{{ t('summary.stackBody') }}</p>
+        </div>
+        <div
+          class="rounded-2xl border px-4 py-3 text-xs transition-colors duration-300"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
+            'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+          }"
+        >
+          <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+            {{ t('summary.roleTitle') }}
+          </p>
+          <p>{{ t('summary.roleBody') }}</p>
+        </div>
+        <div
+          class="rounded-2xl border px-4 py-3 text-xs transition-colors duración-300"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
+            'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+          }"
+        >
+          <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+            {{ t('summary.specialtyTitle') }}
+          </p>
+          <p>{{ t('summary.specialtyBody') }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="about" appAos class="py-16 border-t border-slate-800/70">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-6">
+        {{ t('section.about') }}
+      </h2>
+
+      <div class="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)]">
+        <!-- Texto -->
+        <div
+          class="space-y-4 text-sm"
+          [ngClass]="{ 'text-slate-300': isDark, 'text-slate-700': !isDark }"
+        >
+          <p>{{ t('about.p1') }}</p>
+          <p>{{ t('about.p2') }}</p>
+          <p>{{ t('about.p3') }}</p>
+        </div>
+
+        <!-- Datos rápidos + contacto -->
+        <div class="space-y-4 text-sm">
+          <div
+            class="rounded-2xl border px-4 py-3 transition-colors duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
           >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
-            />
-          </svg>
-        </a>
+            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+              {{ t('about.quick.title') }}
+            </p>
+            <dl class="space-y-1">
+              <div class="flex justify-between gap-4">
+                <dt class="text-slate-400">{{ t('about.quick.locationLabel') }}</dt>
+                <dd>{{ t('about.quick.locationValue') }}</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt class="text-slate-400">{{ t('about.quick.roleLabel') }}</dt>
+                <dd>{{ t('about.quick.roleValue') }}</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt class="text-slate-400">{{ t('about.quick.studiesLabel') }}</dt>
+                <dd>{{ t('about.quick.studiesValue') }}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
+            class="rounded-2xl border px-4 py-3 transition-colors duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
+          >
+            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+              {{ t('about.contact.title') }}
+            </p>
+            <ul class="space-y-1 text-sm">
+              <li>
+                {{ t('about.contact.emailLabel') }}:
+                <span class="font-mono">jprunellcampos&#64;gmail.com</span>
+              </li>
+              <li>
+                {{ t('about.contact.linkedinLabel') }}:
+                <span class="font-mono">
+                  https://www.linkedin.com/in/jordi-prunell-campos-949921180/
+                </span>
+              </li>
+              <li>
+                {{ t('about.contact.githubLabel') }}:
+                <span class="font-mono">github.com/jordiprunell</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formación académica -->
+      <div class="mt-10">
+        <h3 class="text-lg font-semibold mb-4">
+          {{ t('about.studies.title') }}
+        </h3>
+        <div class="grid gap-4 md:grid-cols-2">
+          <!-- Criminología -->
+          <article
+            class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
+          >
+            <div
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-500/15 via-sky-500/5 to-emerald-500/15"
+            ></div>
+            <div class="relative space-y-2">
+              <h4 class="text-sm font-semibold">
+                {{ t('about.studies.criminology.title') }}
+              </h4>
+              <p class="text-xs">
+                {{ t('about.studies.criminology.body') }}
+              </p>
+            </div>
+          </article>
+
+          <!-- Máster Derecho Penal -->
+          <article
+            class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
+          >
+            <div
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duración-300 bg-gradient-to-br from-rose-500/15 via-sky-500/5 to-amber-500/15"
+            ></div>
+            <div class="relative space-y-2">
+              <h4 class="text-sm font-semibold">
+                {{ t('about.studies.master.title') }}
+              </h4>
+              <p class="text-xs">
+                {{ t('about.studies.master.body') }}
+              </p>
+            </div>
+          </article>
+
+          <!-- DAM -->
+          <article
+            class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
+          >
+            <div
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-cyan-500/15 via-sky-500/5 to-violet-500/15"
+            ></div>
+            <div class="relative space-y-2">
+              <h4 class="text-sm font-semibold">
+                {{ t('about.studies.dam.title') }}
+              </h4>
+              <p class="text-xs">
+                {{ t('about.studies.dam.body') }}
+              </p>
+            </div>
+          </article>
+
+          <!-- ASIR -->
+          <article
+            class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+            [ngClass]="{
+              'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+              'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+            }"
+          >
+            <div
+              class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-emerald-500/15 via-sky-500/5 to-indigo-500/15"
+            ></div>
+            <div class="relative space-y-2">
+              <h4 class="text-sm font-semibold">
+                {{ t('about.studies.asir.title') }}
+              </h4>
+              <p class="text-xs">
+                {{ t('about.studies.asir.body') }}
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section id="experience" appAos class="py-16 border-t border-slate-800/70">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-6">
+        {{ t('section.experience') }}
+      </h2>
+      <div class="space-y-4">
+        <!-- Meibit -->
+        <article
+          class="rounded-2xl border p-4 sm:p-5 hover:-translate-y-1.5 transition-all cursor-default"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60 hover:border-cyan-400/60 hover:shadow-[0_0_40px_rgba(34,211,238,0.18)] text-slate-300':
+              isDark,
+            'border-slate-200 bg-white hover:border-cyan-500/60 hover:shadow-[0_0_40px_rgba(14,116,144,0.18)] text-slate-700':
+              !isDark
+          }"
+        >
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <h3 class="text-sm sm:text-base font-semibold">
+                {{ t('exp.meibit.title') }}
+              </h3>
+              <p class="text-xs text-slate-400">
+                {{ t('exp.meibit.techLine') }}
+              </p>
+            </div>
+            <p class="text-xs text-slate-400">
+              {{ t('exp.meibit.period') }}
+            </p>
+          </div>
+          <ul class="mt-3 space-y-1.5 text-xs sm:text-sm">
+            <li>· {{ t('exp.meibit.b1') }}</li>
+            <li>· {{ t('exp.meibit.b2') }}</li>
+            <li>· {{ t('exp.meibit.b3') }}</li>
+            <li>· {{ t('exp.meibit.b4') }}</li>
+            <li>· {{ t('exp.meibit.b5') }}</li>
+            <li>· {{ t('exp.meibit.b6') }}</li>
+          </ul>
+        </article>
+
+        <!-- MediaMarkt -->
+        <article
+          class="rounded-2xl border p-4 sm:p-5 transition-colors duration-300 cursor-default"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
+            'border-slate-200 bg-white text-slate-700': !isDark
+          }"
+        >
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <h3 class="text-sm sm:text-base font-semibold">
+                {{ t('exp.mm.title') }}
+              </h3>
+              <p class="text-xs text-slate-400">
+                {{ t('exp.mm.subtitle') }}
+              </p>
+            </div>
+            <p class="text-xs text-slate-400">
+              {{ t('exp.mm.period') }}
+            </p>
+          </div>
+          <ul class="mt-3 space-y-1.5 text-xs sm:text-sm">
+            <li>· {{ t('exp.mm.b1') }}</li>
+            <li>· {{ t('exp.mm.b2') }}</li>
+            <li>· {{ t('exp.mm.b3') }}</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+<section id="skills" appAos class="py-16 border-t border-slate-800/70">
+  <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-6">
+    {{ t('section.skills') }}
+  </h2>
+
+  <!-- GRID DE SKILLS -->
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 text-sm auto-rows-[minmax(0,1fr)]">
+    <!-- Full Stack -->
+    <div
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+        'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+      }"
+    >
+      <div
+        class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-cyan-500/10 via-sky-500/5 to-purple-500/10"
+      ></div>
+      <div class="relative space-y-2">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">🧩</span>
+          {{ t('skills.fullstack.title') }}
+        </h3>
+        <ul class="space-y-1">
+          <li>· {{ t('skills.fullstack.b1') }}</li>
+          <li>· {{ t('skills.fullstack.b2') }}</li>
+          <li>· {{ t('skills.fullstack.b3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sistemas & Cloud -->
+    <div
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+        'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+      }"
+    >
+      <div
+        class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-sky-500/10"
+      ></div>
+      <div class="relative space-y-2">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">🖥️</span>
+          {{ t('skills.systems.title') }}
+        </h3>
+        <ul class="space-y-1">
+          <li>· {{ t('skills.systems.b1') }}</li>
+          <li>· {{ t('skills.systems.b2') }}</li>
+          <li>· {{ t('skills.systems.b3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Identidad & Seguridad -->
+    <div
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+        'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+      }"
+    >
+      <div
+        class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-violet-500/15 via-sky-500/5 to-emerald-500/10"
+      ></div>
+      <div class="relative space-y-2">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">🔐</span>
+          {{ t('skills.security.title') }}
+        </h3>
+        <ul class="space-y-1">
+          <li>· {{ t('skills.security.b1') }}</li>
+          <li>· {{ t('skills.security.b2') }}</li>
+          <li>· {{ t('skills.security.b3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Soporte IT -->
+    <div
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duración-300"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+        'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+      }"
+    >
+      <div
+        class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-amber-500/10 via-fuchsia-500/5 to-cyan-500/10"
+      ></div>
+      <div class="relative space-y-2">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">🛠️</span>
+          {{ t('skills.support.title') }}
+        </h3>
+        <ul class="space-y-1">
+          <li>· {{ t('skills.support.b1') }}</li>
+          <li>· {{ t('skills.support.b2') }}</li>
+          <li>· {{ t('skills.support.b3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Gestión de proyectos -->
+    <div
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+        'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+      }"
+    >
+      <div
+        class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-sky-500/10 via-emerald-500/5 to-indigo-500/10"
+      ></div>
+      <div class="relative space-y-2">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">📌</span>
+          {{ t('skills.projects.title') }}
+        </h3>
+        <ul class="space-y-1">
+          <li>· {{ t('skills.projects.b1') }}</li>
+          <li>· {{ t('skills.projects.b2') }}</li>
+          <li>· {{ t('skills.projects.b3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tooling -->
+    <div
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
+        'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
+      }"
+    >
+      <div
+        class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-rose-500/10 via-purple-500/5 to-cyan-500/10"
+      ></div>
+      <div class="relative space-y-2">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">⚙️</span>
+          {{ t('skills.tools.title') }}
+        </h3>
+        <ul class="space-y-1">
+          <li>· {{ t('skills.tools.b1') }}</li>
+          <li>· {{ t('skills.tools.b2') }}</li>
+          <li>· {{ t('skills.tools.b3') }}</li>
+        </ul>
       </div>
     </div>
   </div>
-</main>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+  <!-- CARD DE CERTIFICACIONES A ANCHO COMPLETO -->
+<div class="mt-10">
+  <div
+    class="relative w-full rounded-2xl border p-5 sm:p-6 overflow-hidden group transition-all duración-300"
+    [ngClass]="{
+      'border-slate-800 bg-slate-950/80 text-slate-200': isDark,
+      'border-slate-200 bg-white/90 text-slate-700 shadow-sm': !isDark
+    }"
+  >
+    <!-- Glow hover -->
+    <div
+      class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-amber-500/12 via-cyan-500/8 to-violet-500/12"
+    ></div>
+
+    <div
+      class="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
+      <!-- Texto -->
+      <div class="space-y-1">
+        <h3
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 flex items-center gap-2"
+        >
+          <span class="text-base">🏅</span>
+          {{ t('skills.certs.title') }}
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-xl">
+          {{ t('skills.certs.subtitle') }}
+        </p>
+      </div>
+
+      <!-- Medallitas -->
+      <div class="flex flex-wrap gap-2 text-[11px] sm:text-xs">
+        <!-- ✅ ZKTECO CLICABLE -->
+        <button
+          type="button"
+          class="inline-flex items-center gap-1 rounded-full px-3 py-1 border border-amber-400/70 bg-amber-500/10 hover:bg-amber-500/20 hover:-translate-y-[1px] transition-all cursor-pointer"
+          (click)="openCertification('zkteco')"
+        >
+          <span>🥇</span>
+          <span>ZKTeco · Access Control Certified</span>
+        </button>
+
+        <!-- Resto, no clicables -->
+        <span
+          class="inline-flex items-center gap-1 rounded-full px-3 py-1 border border-cyan-400/70 bg-cyan-500/10"
+        >
+          <span>🥈</span>
+          <span>Suprema · BioStar 2 Certified</span>
+        </span>
+
+        <span
+          class="inline-flex items-center gap-1 rounded-full px-3 py-1 border border-violet-400/70 bg-violet-500/10"
+        >
+          <span>🥉</span>
+          <span>Hikvision · HikCentral Certified</span>
+        </span>
+
+        <span
+          class="inline-flex items-center gap-1 rounded-full px-3 py-1 border border-sky-400/70 bg-sky-500/10"
+        >
+          <span>🎖️</span>
+          <span>Microsoft · Entra ID / Azure AD</span>
+        </span>
+
+        <span
+          class="inline-flex items-center gap-1 rounded-full px-3 py-1 border border-emerald-400/70 bg-emerald-500/10"
+        >
+          <span>🚗</span>
+          <span>SmartLPR · ANPR & Vehicle Access</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
 
 
-<router-outlet />
+
+        <!-- GALERÍA / WIDE IMAGES -->
+    <section id="gallery" appAos class="py-16 border-t border-slate-800/70">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-2">
+        {{ t('section.gallery') }}
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-2xl">
+        {{ t('gallery.subtitle') }}
+      </p>
+
+      <div class="mt-6 flex flex-col items-center">
+        <div class="relative w-full max-w-3xl group">
+          <!-- Glow exterior -->
+          <div
+            class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-amber-400 opacity-40 blur-xl group-hover:opacity-80 transition-opacity duration-500"
+          ></div>
+
+          <div
+  class="relative overflow-hidden rounded-3xl border shadow-xl h-80 md:h-[26rem] gallery-frame"
+  [ngClass]="{
+    'border-slate-800 bg-slate-950/90': isDark,
+    'border-slate-200 bg-white/90': !isDark
+  }"
+>
+
+
+
+            <img
+  *ngFor="let img of wideImages; let i = index"
+  [src]="img.src"
+  [alt]="t('gallery.' + img.id + '.alt')"
+  class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+  [ngClass]="{
+    'opacity-100': currentWideImageIndex === i,
+    'opacity-0': currentWideImageIndex !== i
+  }"
+/>
+
+
+
+            <!-- Cintillo inferior con info -->
+            <div
+              class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 pb-3 pt-6 flex items-center justify-between text-[11px] text-slate-100 gap-3"
+            >
+              <div>
+                <p class="font-semibold tracking-wide text-xs sm:text-sm">
+                  {{
+                    t(
+                      'gallery.' +
+                        wideImages[currentWideImageIndex].id +
+                        '.title'
+                    )
+                  }}
+                </p>
+                <p class="text-[11px] text-slate-300 mt-0.5 max-w-md">
+                  {{
+                    t(
+                      'gallery.' +
+                        wideImages[currentWideImageIndex].id +
+                        '.caption'
+                    )
+                  }}
+                </p>
+              </div>
+              <div class="flex items-center gap-2 text-[10px]">
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Tecnología · Eventos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dots para indicar qué foto está activa (y poder cambiar a mano) -->
+        <div class="mt-3 flex gap-2">
+          <button
+            *ngFor="let img of wideImages; let i = index"
+            type="button"
+            class="h-2.5 rounded-full border transition-all"
+            [ngClass]="{
+              'bg-cyan-400 border-cyan-400 w-5': currentWideImageIndex === i,
+              'border-slate-500 bg-slate-800 w-2.5': currentWideImageIndex !== i
+            }"
+            (click)="currentWideImageIndex = i"
+          ></button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PROYECTOS -->
+    <section id="projects" appAos class="py-16 border-t border-slate-800/70">
+      <div class="flex items-center justify-between gap-3 mb-6">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">
+            {{ t('section.projects') }}
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            {{ t('projects.subtitle') }}
+          </p>
+        </div>
+        <button
+          class="hidden sm:inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-medium hover:-translate-y-[1px] hover:shadow-md transition-all"
+          [ngClass]="{
+            'border-slate-700 text-slate-100 hover:border-cyan-400 hover:text-cyan-300': isDark,
+            'border-slate-300 text-slate-800 hover:border-cyan-500 hover:text-cyan-600 bg-white/70': !isDark
+          }"
+          (click)="viewAllProjects()"
+        >
+          {{ t('projects.viewAll') }}
+          <span>↗</span>
+        </button>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        <article
+          *ngFor="let project of featuredProjects"
+          class="group rounded-2xl border p-4 sm:p-5 hover:-translate-y-1.5 transition-all cursor-pointer relative overflow-hidden"
+          (click)="openProject(project)"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60 hover:border-cyan-400/70 hover:shadow-[0_0_50px_rgba(34,211,238,0.25)] text-slate-300':
+              isDark,
+            'border-slate-200 bg-white/90 hover:border-cyan-500/70 hover:shadow-[0_0_50px_rgba(14,116,144,0.25)] text-slate-700':
+              !isDark
+          }"
+        >
+          <div
+            class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-cyan-500/10 via-sky-500/5 to-emerald-500/10"
+          ></div>
+
+          <div class="relative flex flex-col gap-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h3 class="text-sm sm:text-base font-semibold">
+                  {{ project.title }}
+                </h3>
+              </div>
+              <span class="rounded-full bg-slate-800/80 px-2 py-0.5 text-[10px] text-slate-100">
+                {{ project.techBadge }}
+              </span>
+            </div>
+
+            <p class="mt-1 text-xs sm:text-sm">
+              {{ project.description }}
+            </p>
+
+            <ul class="mt-2 flex flex-wrap gap-1.5 text-[11px] text-slate-400">
+              <li
+                *ngFor="let tag of project.tags"
+                class="rounded-full bg-slate-800/70 px-2 py-0.5"
+              >
+                {{ tag }}
+              </li>
+            </ul>
+
+            <div class="mt-3 flex items-center justify-between text-[11px] text-slate-400">
+              <span>{{ project.role }}</span>
+              <span class="inline-flex items-center gap-1 group-hover:text-cyan-400">
+                {{ t('projects.card.viewDetail') }}
+                <span>↗</span>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- CTA ver todos móvil -->
+      <div class="mt-6 flex justify-center sm:hidden">
+        <button
+          class="inline-flex items-center gap-1 rounded-full border px-4 py-1.5 text-[11px] font-medium hover:-translate-y-[1px] hover:shadow-md transition-all"
+          [ngClass]="{
+            'border-slate-700 text-slate-100 hover:border-cyan-400 hover:text-cyan-300': isDark,
+            'border-slate-300 text-slate-800 hover:border-cyan-500 hover:text-cyan-600 bg-white/80': !isDark
+          }"
+          (click)="viewAllProjects()"
+        >
+          {{ t('projects.viewAll') }}
+          <span>↗</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section
+  id="contact"
+  appAos
+  class="py-16 border-t border-slate-800/70"
+>
+  <h2
+    class="text-2xl sm:text-3xl font-semibold tracking-tight mb-6"
+    [ngClass]="{ 'text-slate-50': isDark, 'text-slate-900': !isDark }"
+  >
+    {{ t('section.contact') }}
+  </h2>
+
+  <div
+    class="grid gap-6 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] items-start"
+  >
+    <!-- COLUMNA IZQUIERDA: TEXTO + BOTONES + QR -->
+    <div
+      class="space-y-4 text-sm"
+      [ngClass]="{ 'text-slate-300': isDark, 'text-slate-700': !isDark }"
+    >
+      <p>{{ t('contact.p1') }}</p>
+      <p>{{ t('contact.p2') }}</p>
+
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="mailto:jprunellcampos@gmail.com"
+          class="inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-medium shadow-lg shadow-cyan-500/40 border border-cyan-400/60 bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 hover:from-emerald-400 hover:to-cyan-400 transition-all duration-200"
+        >
+          {{ t('contact.emailCta') }}
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/jordi-prunell-campos-949921180/"
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-medium border border-slate-600/70 bg-slate-900/60 text-slate-100 hover:border-cyan-400 hover:text-cyan-200 transition-colors duration-200"
+        >
+          {{ t('contact.linkedinCta') }}
+        </a>
+      </div>
+
+      <!-- TARJETA QR -->
+      <div class="mt-6 contact-qr-card flex items-center gap-4">
+        <div class="contact-qr-wrapper">
+          <img
+            src="assets/img/qr-linkedin-jordi.png"
+            alt="QR {{ t('about.contact.linkedinLabel') }}"
+            class="contact-qr-img"
+          />
+        </div>
+        <div class="text-xs md:text-sm">
+          <p class="font-semibold mb-1">
+            {{ t('contact.qr.title') }}
+          </p>
+          <p class="text-slate-400">
+            {{ t('contact.qr.subtitle') }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: UBICACIÓN + MAPA + RESUMEN RÁPIDO -->
+    <div class="space-y-4 text-xs">
+      <!-- CARD UBICACIÓN + MAPA -->
+      <div
+        class="rounded-2xl border overflow-hidden"
+        [ngClass]="{
+          'border-slate-800 bg-slate-900/70 text-slate-200': isDark,
+          'border-slate-200 bg-white text-slate-700 shadow-sm': !isDark
+        }"
+      >
+        <div class="flex items-center justify-between px-4 pt-3 pb-2">
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+              {{ t('contact.locationCard.title') }}
+            </p>
+            <p class="text-xs font-semibold">
+              {{ t('contact.locationCard.locationText') }}
+            </p>
+          </div>
+          <span
+            class="inline-flex items-center rounded-full bg-emerald-500/15 text-[10px] px-3 py-1 text-emerald-300"
+          >
+            {{ t('contact.locationCard.modePill') }}
+          </span>
+        </div>
+        <div class="h-52 w-full">
+          <iframe
+            title="Mapa de Tordera"
+            class="w-full h-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5983.997588243165!2d2.713!3d41.702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12bb3fa2f1e9f8ab%3A0x79e6b065e0f1e6f7!2sTordera!5e0!3m2!1ses!2ses!4v1700000000000"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- CARD RESUMEN RÁPIDO -->
+      <div
+        class="rounded-2xl border p-4"
+        [ngClass]="{
+          'border-slate-800 bg-slate-900/70 text-slate-200': isDark,
+          'border-slate-200 bg-white text-slate-700 shadow-sm': !isDark
+        }"
+      >
+        <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+          {{ t('contact.summary.title') }}
+        </p>
+        <ul class="space-y-1.5">
+          <li>· {{ t('contact.summary.l1') }}</li>
+          <li>· {{ t('contact.summary.l2') }}</li>
+          <li>· {{ t('contact.summary.l3') }}</li>
+          <li>· {{ t('contact.summary.l4') }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- MODAL DETALLE PROYECTO -->
+  <ng-container *ngIf="selectedProject as project">
+    <div
+      class="fixed inset-0 z-40 flex items-center justify-center px-4 py-6"
+      [ngClass]="{
+        'bg-slate-950/80': isDark,
+        'bg-slate-900/75': !isDark
+      }"
+      (click)="closeProject()"
+    >
+      <div
+        class="relative w-full max-w-4xl md:h-[80vh] rounded-3xl overflow-hidden border shadow-2xl grid md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)]"
+        [ngClass]="{
+          'border-slate-700 bg-slate-950': isDark,
+          'border-slate-200 bg-white': !isDark
+        }"
+        (click)="$event.stopPropagation()"
+      >
+        <!-- Columna izquierda: texto -->
+        <div class="p-5 sm:p-6 flex flex-col gap-4 overflow-y-auto modal-body-scroll">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-semibold">
+                {{ project.title }}
+              </h3>
+              <p class="text-xs text-slate-400">
+                {{ project.client }} · {{ project.period }}
+              </p>
+            </div>
+            <span class="rounded-full bg-slate-800/80 px-3 py-1 text-[11px] text-slate-100">
+              {{ project.techBadge }}
+            </span>
+          </div>
+
+          <p class="text-sm" [ngClass]="{ 'text-slate-300': isDark, 'text-slate-700': !isDark }">
+            {{ project.context }}
+          </p>
+
+          <div class="grid gap-3 text-xs sm:text-sm">
+            <div *ngIf="project.responsibilities?.length">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+                {{ t('modal.project.responsibilitiesTitle') }}
+              </p>
+              <ul class="list-disc list-inside space-y-1">
+                <li *ngFor="let r of project.responsibilities">
+                  {{ r }}
+                </li>
+              </ul>
+            </div>
+
+            <div *ngIf="project.results?.length">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+                {{ t('modal.project.resultsTitle') }}
+              </p>
+              <ul class="list-disc list-inside space-y-1">
+                <li *ngFor="let res of project.results">
+                  {{ res }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: captura + stack -->
+        <div
+          class="border-t md:border-t-0 md:border-l p-5 sm:p-6 flex flex-col gap-4"
+          [ngClass]="{
+            'border-slate-800 bg-slate-900/60': isDark,
+            'border-slate-200 bg-slate-50': !isDark
+          }"
+        >
+                <!-- Imagen / placeholder con formato pantalla 16:9 -->
+      <div
+        class="relative mb-1 w-full aspect-video rounded-2xl border border-slate-700/80 bg-slate-900/90 overflow-hidden shadow-xl"
+      >
+        <!-- Barra superior tipo ventana -->
+        <div
+          class="absolute top-0 inset-x-0 h-7 bg-slate-900/95 border-b border-slate-800 flex items-center gap-1 px-3"
+        >
+          <span class="h-2 w-2 rounded-full bg-rose-500/80"></span>
+          <span class="h-2 w-2 rounded-full bg-amber-400/80"></span>
+          <span class="h-2 w-2 rounded-full bg-emerald-400/80"></span>
+          <span class="ml-2 text-[10px] text-slate-400 truncate">
+            Dashboard de matrículas · Producción
+          </span>
+        </div>
+
+        <ng-container *ngIf="project.screenshot; else screenshotPlaceholder">
+  <img
+    [src]="project.screenshot"
+    alt="Screenshot del proyecto"
+    class="w-full h-full object-cover mt-7 cursor-zoom-in"
+    (click)="project.screenshot && openScreenshot(project.screenshot)"
+  />
+</ng-container>
+
+
+        <ng-template #screenshotPlaceholder>
+          <div
+            class="flex flex-col items-center justify-center gap-1 px-4 text-center mt-7 h-full"
+          >
+            <span>{{ t('modal.project.placeholder.main') }}</span>
+            <span class="text-[10px] text-slate-400">
+              {{ t('modal.project.placeholder.sub') }}
+            </span>
+          </div>
+        </ng-template>
+      </div>
+
+
+
+          <div class="text-xs sm:text-sm">
+            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+              {{ t('modal.project.stackTitle') }}
+            </p>
+            <ul class="flex flex-wrap gap-1.5">
+              <li
+                *ngFor="let s of project.stack"
+                class="rounded-full bg-slate-800/80 px-2 py-0.5 text-[11px] text-slate-100"
+              >
+                {{ s }}
+              </li>
+            </ul>
+          </div>
+
+          <button
+            class="mt-2 self-end rounded-full border px-3 py-1 text-[11px] font-medium flex items-center gap-1 hover:-translate-y-[1px] transition-all"
+            (click)="closeProject()"
+            [ngClass]="{
+              'border-slate-600 text-slate-100 hover:border-cyan-400 hover:text-cyan-300': isDark,
+              'border-slate-400 text-slate-800 hover:border-cyan-500 hover:text-cyan-700 bg-white/80': !isDark
+            }"
+          >
+            {{ t('modal.project.close') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- MODAL TODOS LOS PROYECTOS -->
+  <ng-container *ngIf="showAllProjects">
+    <div
+      class="fixed inset-0 z-30 px-4 py-6 flex items-center justify-center"
+      [ngClass]="{
+        'bg-slate-950/80': isDark,
+        'bg-slate-900/75': !isDark
+      }"
+      (click)="showAllProjects = false"
+    >
+      <div
+        class="relative w-full max-w-5xl h-[85vh] rounded-3xl overflow-hidden border shadow-2xl flex flex-col"
+        [ngClass]="{
+          'border-slate-700 bg-slate-950': isDark,
+          'border-slate-200 bg-white': !isDark
+        }"
+        (click)="$event.stopPropagation()"
+      >
+        <div
+          class="flex items-center justify-between px-5 pt-4 pb-3 border-b"
+          [ngClass]="{
+            'border-slate-800': isDark,
+            'border-slate-200': !isDark
+          }"
+        >
+          <div>
+            <h3 class="text-sm sm:text-base font-semibold">
+              {{ t('modal.allProjects.title') }}
+            </h3>
+            <p class="text-[11px] text-slate-400">
+              {{ t('modal.allProjects.subtitle') }}
+            </p>
+          </div>
+          <button
+            class="rounded-full border px-3 py-1 text-[11px] font-medium"
+            (click)="showAllProjects = false"
+            [ngClass]="{
+              'border-slate-600 text-slate-100 hover:border-cyan-400 hover:text-cyan-300': isDark,
+              'border-slate-400 text-slate-800 hover:border-cyan-500 hover:text-cyan-700 bg-white/80': !isDark
+            }"
+          >
+            {{ t('modal.allProjects.close') }}
+          </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 sm:p-5 modal-body-scroll">
+          <div class="grid gap-4 md:grid-cols-2">
+            <article
+              *ngFor="let project of projects"
+              class="group rounded-2xl border p-4 sm:p-5 hover:-translate-y-1.5 transition-all cursor-pointer relative overflow-hidden"
+              (click)="openProject(project)"
+              [ngClass]="{
+                'border-slate-800 bg-slate-900/60 hover:border-cyan-400/70 hover:shadow-[0_0_40px_rgba(34,211,238,0.25)] text-slate-300':
+                  isDark,
+                'border-slate-200 bg-white/90 hover:border-cyan-500/70 hover:shadow-[0_0_40px_rgba(14,116,144,0.25)] text-slate-700':
+                  !isDark
+              }"
+            >
+              <div
+                class="pointer-events-none absolute inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-cyan-500/10 via-sky-500/5 to-emerald-500/10"
+              ></div>
+
+              <div class="relative space-y-2">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 class="text-sm sm:text-base font-semibold">
+                      {{ project.title }}
+                    </h3>
+                    <p class="text-[11px] text-slate-400">
+                      {{ project.client }} · {{ project.period }}
+                    </p>
+                  </div>
+                  <span class="rounded-full bg-slate-800/80 px-2 py-0.5 text-[10px] text-slate-100">
+                    {{ project.techBadge }}
+                  </span>
+                </div>
+
+                <p class="text-xs sm:text-sm">
+                  {{ project.description }}
+                </p>
+
+                <ul class="mt-1.5 flex flex-wrap gap-1.5 text-[11px] text-slate-400">
+                  <li
+                    *ngFor="let tag of project.tags"
+                    class="rounded-full bg-slate-800/80 px-2 py-0.5"
+                  >
+                    {{ tag }}
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <!-- OVERLAY DE SCREENSHOT AMPLIADA -->
+  <ng-container *ngIf="enlargedScreenshot as shot">
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-black/80"
+      (click)="closeScreenshot()"
+    >
+      <div
+        class="relative max-w-5xl w-full"
+        (click)="$event.stopPropagation()"
+      >
+        <img
+          [src]="shot"
+          alt="Screenshot ampliada"
+          class="w-full h-auto rounded-2xl shadow-2xl border border-slate-700"
+        />
+
+        <button
+          type="button"
+          class="absolute -top-3 -right-3 rounded-full bg-slate-900/90 border border-slate-600 text-[11px] px-3 py-1 text-slate-100 hover:border-cyan-400 hover:text-cyan-300 shadow-lg"
+          (click)="closeScreenshot()"
+        >
+          Cerrar ✕
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>
