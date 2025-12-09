@@ -27,6 +27,13 @@ interface WideImage {
   src: string;
 }
 
+interface TechLogo {
+  id: string;
+  name: string;
+  img: string;
+}
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -46,7 +53,8 @@ export class AppComponent implements OnInit, OnDestroy {
     { code: 'en' as LangCode, label: 'English', flag: 'assets/img/flags/uk.svg' },
   ];
 
-  cvUrl = 'assets/cv/jordi-prunell-cv.pdf';
+  cvUrlEs = 'assets/cv/jordi-prunell-cv.pdf';
+  cvUrlEn = 'assets/cv/CV-ENG.pdf';
   zktecoCertUrl = 'assets/certificates/jordi-prunell-zkbio-cvsecurity.pdf';
 
 
@@ -56,6 +64,18 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/img/jordi-dev.jpg',
     'assets/img/jordi-1.jpg',
   ];
+
+  
+
+    get cvUrl(): string {
+    // Si está en inglés → CV en inglés
+    if (this.currentLang === 'en') {
+      return this.cvUrlEn;
+    }
+
+    // Para español y catalán, usamos el CV en español
+    return this.cvUrlEs;
+  }
 
   openScreenshot(src: string): void {
     this.enlargedScreenshot = src;
@@ -77,240 +97,322 @@ export class AppComponent implements OnInit, OnDestroy {
     { id: 'tech', src: 'assets/img/jordi-2.jpg' },
   ];
 
+    techLogos = [
+    { id: 'csharp', src: 'assets/img/logos/csharp.png', label: 'C# / .NET' },
+    { id: 'angular', src: 'assets/img/logos/angular.png', label: 'Angular' },
+    { id: 'sqlserver', src: 'assets/img/logos/sqlserver.png', label: 'SQL Server' },
+    { id: 'visualstudio', src: 'assets/img/logos/visual-studio.png', label: 'Visual Studio' },
+    { id: 'github', src: 'assets/img/logos/github.png', label: 'GitHub' },
+    { id: 'docker', src: 'assets/img/logos/docker.png', label: 'Docker' },
+  ];
+
+
+
   // ===================== PROYECTOS =====================
+    // ===================== PROYECTOS =====================
   projects: Project[] = [
     {
-    id: 'escubedo-fichajes',
-    title: 'Plataforma de control de matrículas y fichajes',
-    techBadge: 'Angular · .NET Web API · SQL Server · LPR',
-    description:
-      'Solución web para controlar en tiempo real los accesos de vehículos a una planta industrial: login de usuarios, tabla de movimientos con filtros avanzados e imagen asociada a cada lectura de matrícula.',
-    tags: ['Full Stack', 'Control de accesos', 'LPR · Lectura de matrículas'],
-
-    client: 'Gran empresa industrial del sector metalúrgico',
-    role: 'Full Stack .NET & Angular · IT Systems',
-    period: '2024 – Actualidad',
-    context:
-      'Proyecto para centralizar todos los accesos de vehículos (trabajadores, visitas y transportistas) usando una cámara LPR Quercus conectada a una API .NET, base de datos SQL Server y una web en Angular para explotación de los datos.',
-
-    responsibilities: [
-      'Diseño del modelo de datos en SQL Server para movimientos, matrículas, tipos de acceso e imágenes asociadas.',
-      'Desarrollo de una API REST en .NET que recibe eventos JSON de la cámara LPR Quercus y los guarda en base de datos.',
-      'Implementación del frontal en Angular con login, buscador, filtros por fecha, indicadores diarios y exportación a Excel.',
-      'Visualización de la imagen capturada para cada movimiento y posibilidad de gestionar/borrar registros desde la web.',
-      'Despliegue de la API y la web en IIS sobre servidor Windows, con configuración de HTTPS, logs y copias de seguridad.'
-    ],
-
-    stack: [
-      'ASP.NET Web API',
-      'C#',
-      'Angular',
-      'SQL Server',
-      'Entity Framework',
-      'Cámara LPR Quercus (SmartLPR)',
-      'IIS · Windows Server',
-      'Exportación a Excel'
-    ],
-
-    results: [
-      'Control en tiempo real de los accesos de vehículos con histórico consultable desde cualquier puesto autorizado.',
-      'Trazabilidad completa de cada movimiento gracias a la imagen asociada a la matrícula.',
-      'Reducción de tareas manuales de validación para el acceso al recinto.'
-    ],
-
-    screenshot: 'assets/img/projects/matriculas-dashboard.png'
-  },
-    {
-  id: 'amb-sap-marcajes',
-  title: 'Servicios backend de marcajes para entorno SAP',
-  techBadge: '.NET · Windows Services · SAP · SQL Server',
+  id: 'escubedo-fichajes',
+  title: 'Panel web de matrículas y accesos en planta',
+  techBadge: 'Angular · .NET Web API · SQL Server · LPR',
   description:
-    'Servicios backend en .NET que generan, transforman y envían marcajes de presencia desde el sistema de control de accesos a SAP para su gestión en RRHH.',
-  tags: ['Servicios Windows', 'Integración SAP', 'BioTime', 'Automatización'],
-  client: 'Operador público de transporte metropolitano con entorno SAP',
-  role: 'Backend & Integrations Developer',
-  period: '2024',
-  context:
-    'Integración entre un sistema de control de accesos/presencia (BioTime) y el módulo de RRHH en SAP para automatizar el alta diaria de marcajes de empleados.',
-
-  responsibilities: [
-    'Diseño del modelo de datos intermedio en SQL Server para almacenar y normalizar los marcajes provenientes de BioTime.',
-    'Desarrollo de servicios Windows en .NET que recogen los marcajes, aplican reglas de negocio y generan los ficheros/interfaz de entrada para SAP.',
-    'Implementación de reglas de mapeo entre tipos de marcaje (entrada, salida, incidencias) y los códigos de tiempo/ausencia definidos por RRHH en SAP.',
-    'Programación de tareas y jobs para la ejecución automática de los procesos en distintas franjas horarias.',
-    'Implementación de trazas y logs detallados para poder auditar cada envío y reprocesar incidencias cuando SAP rechaza algún registro.'
+    'Aplicación web para el equipo de seguridad y IT que permite ver, filtrar y operar en tiempo real sobre todos los accesos de vehículos a la planta: login, roles, histórico de movimientos, imágenes asociadas y acciones sobre la barrera.',
+  tags: [
+    'Aplicación web',
+    'Dashboard de accesos',
+    'LPR · Lectura de matrículas'
   ],
 
-  stack: [
-    '.NET Framework',
-    'C#',
-    'Servicios Windows',
-    'SQL Server',
-    'BioTime',
-    'SAP (RRHH)'
-  ],
-
-  results: [
-    'Automatización del envío diario de marcajes desde el sistema de control de accesos a SAP.',
-    'Reducción significativa de la carga manual de introducción de fichajes por parte de RRHH.',
-    'Mayor trazabilidad y control de errores gracias a los logs y procesos de reintento implementados.'
-  ],
-
-  // Si más adelante quieres poner una imagen conceptual:
-  // screenshot: 'assets/img/projects/sap-marcajes-backend.png',
-},
-
-    {
-  id: 'hipra-biostar-biotime',
-  title: 'Plataforma de integraciones BioStar / BioTime',
-  techBadge: '.NET · BioStar 2 · BioTime · SQL Server',
-  description:
-    'Servicios backend y procesos de integración para unificar el control de accesos físico y la presencia de empleados en un campus con decenas de puertas y edificios.',
-  tags: ['Control de accesos', 'Integraciones', 'Servicios Windows', 'Microservicios'],
-  client: 'Multinacional del sector farmacéutico y biotecnológico',
-  role: 'IT & Integrations · Access Control',
-  period: '2023 – 2024',
-  context:
-    'Entorno corporativo con múltiples sedes, cientos de lectores de control de accesos y distintos sistemas de presencia (BioStar 2, BioTime) que necesitaban consolidar la información.',
-  responsibilities: [
-    'Análisis de las BBDD de BioStar 2 y BioTime para entender el modelo de datos de usuarios, tarjetas, plantillas biométricas y logs de acceso.',
-    'Diseño y desarrollo de servicios Windows y microservicios .NET para sincronizar usuarios, tarjetas y grupos entre BioStar 2, BioTime y sistemas de RRHH.',
-    'Implementación de procesos programados que consolidan marcajes y generan vistas de presencia adaptadas a las reglas de negocio del cliente.',
-    'Optimización de consultas y procedimientos almacenados en SQL Server para trabajar con tablas de millones de registros de eventos.',
-    'Migraciones controladas de bases de datos y cambios de servidor garantizando la integridad de los datos y la mínima parada de servicio.',
-    'Instrumentación de logs detallados y alertas básicas para detectar incidencias de sincronización, caídas de servicios o dispositivos desconectados.'
-  ],
-  stack: [
-    'C# · .NET',
-    'Servicios Windows / microservicios',
-    'SQL Server',
-    'BioStar 2 API',
-    'BioTime'
-    
-  ],
-  results: [
-    'Consolidación de los datos de accesos y presencia en un modelo único para reporting y auditoría.',
-    'Reducción de errores manuales en altas/bajas de usuarios y tarjetas gracias a las sincronizaciones automáticas.',
-    'Base técnica preparada para futuros cuadros de mando y análisis de seguridad física a nivel corporativo.'
-  ]
-},
-
-    {
-  id: 'iese-visitas',
-  title: 'Aplicación de gestión de visitas y tarjetas de acceso',
-  techBadge: '.NET · WinForms · SQL Server',
-  description:
-    'Aplicación de escritorio y servicios backend para registrar visitas, emitir tarjetas temporales e integrarlas con el sistema de control de accesos del campus.',
-  tags: ['Aplicación de escritorio', 'Control de visitas', 'Accesos físicos'],
-  client: 'Escuela de negocios internacional',
-  role: 'Developer & Support · Access Control',
-  period: '2023 – 2024',
-  context:
-    'Centro educativo con varios edificios y zonas restringidas donde es necesario controlar quién entra, cuánto tiempo permanece y qué tipo de acreditación utiliza (visitas, proveedores, alumnos invitados, etc.).',
-  responsibilities: [
-    'Mantenimiento evolutivo de la aplicación WinForms de gestión de visitas, corrigiendo errores y añadiendo nuevas funcionalidades según las necesidades del departamento de seguridad.',
-    'Mejora de los flujos de alta de visitas: búsqueda rápida de contactos habituales, registro de vehículo, persona responsable y zona de acceso.',
-    'Desarrollo de lógica para la emisión y devolución de tarjetas temporales, vinculadas a las puertas y horarios permitidos.',
-    'Implementación de consultas y vistas SQL para facilitar listados de visitas, históricos y trazabilidad de accesos.',
-    'Apoyo en la integración con el sistema físico de control de accesos, validando que las visitas registradas en la aplicación puedan abrir únicamente las puertas autorizadas.',
-    'Soporte de segunda línea al personal de recepción y seguridad cuando aparecían incidencias relacionadas con visitas o tarjetas.'
-  ],
-  stack: [
-    'C# · .NET Framework',
-    'WinForms',
-    'SQL Server',
-    'Procedimientos almacenados y vistas',
-    'Integración con sistema de control de accesos'
-  ],
-  results: [
-    'Mayor trazabilidad de las visitas y de los movimientos dentro del campus gracias a un registro más completo y accesible.',
-    'Reducción de tareas manuales de recepción y seguridad en la gestión de tarjetas temporales.',
-    'Mejor alineación con las políticas de seguridad física y auditoría del centro.'
-  ]
-},
-
-    {
-  id: 'camara-lpr-events',
-  title: 'Plataforma de gestión de muelles y flota de reparto',
-  techBadge: '.NET · WinForms · SQL Server',
-  description:
-    'Suite interna para planificar la ocupación de muelles, asignar camiones y controlar en tiempo real el estado de carga y descarga en una plataforma logística de paquetería.',
-  tags: ['Logística', 'Planning de muelles', 'Aplicación de escritorio'],
-  client: 'Operador logístico internacional de paquetería',
-  role: 'Full Stack · Backend & Desktop',
+  client: 'Gran empresa industrial del sector metalúrgico',
+  role: 'Full Stack .NET & Angular · IT Systems',
   period: '2024 – Actualidad',
   context:
-    'Centro de cross-docking con múltiples muelles, rutas y turnos donde era necesario saber en cada momento qué camión está en cada puerta, cuánto tiempo lleva en muelle y si cumple las ventanas de carga pactadas.',
+    'Capa web construida sobre el servidor de eventos LPR para dar al departamento de seguridad un panel único desde el que consultar el histórico de matrículas, buscar movimientos concretos, ver la imagen capturada y operar la barrera de acceso sin salir del navegador.',
 
   responsibilities: [
-    'Diseño del modelo de datos en SQL Server para muelles, camiones, rutas, slots horarios, incidencias y métricas operativas.',
-    'Desarrollo de una aplicación WinForms para el equipo de almacén con vistas configurables: panel de muelles, cola de llegada de camiones, timeline de ventanas horarias y estado de carga/descarga.',
-    'Implementación de lógica backend en .NET para la asignación automática de muelles en función de ruta, tipo de mercancía, prioridad y SLA de entrega.',
-    'Creación de servicios Windows y tareas programadas para importar y consolidar datos desde sistemas externos (TMS/WMS) y desde el sistema de control de accesos de la nave.',
-    'Construcción de informes operativos y exportaciones a Excel sobre tiempos de estancia, uso de muelles, puntualidad y productividad por turno.',
-    'Soporte a operación en directo (turnos de mañana y noche), analizando logs, corrigiendo datos y afinando reglas de negocio según feedback del personal de muelle.'
+    'Diseño funcional del panel web junto con el equipo de seguridad: vistas principales, flujos de trabajo y tipos de usuario (operador, supervisor y superadministrador).',
+    'Implementación del frontal en Angular con login, gestión de sesión y distintos niveles de permisos según el rol del usuario.',
+    'Construcción de una tabla de movimientos con filtros avanzados por fecha, matrícula, tipo de acceso, sentido (entrada/salida) y estado, con paginación e histórico consultable.',
+    'Visualización de la imagen capturada para cada lectura de matrícula mediante un visor integrado dentro de la propia web.',
+    'Desarrollo de acciones operativas desde la web para el superadministrador, como apertura manual de la barrera o validación de accesos excepcionales a través de la API .NET.',
+    'Creación de un módulo de administración para gestionar usuarios de la aplicación, perfiles de acceso y listas de matrículas autorizadas.',
+    'Desarrollo de endpoints específicos en la API .NET para soportar los filtros, búsquedas y operaciones del frontal con buen rendimiento.',
+    'Despliegue de la API y la web en IIS sobre servidor Windows, con configuración de HTTPS, logs y copias de seguridad.'
   ],
 
   stack: [
-    'C# · .NET Framework',
-    'WinForms',
+    'ASP.NET Web API',
+    'C#',
+    'Angular',
     'SQL Server',
-    'Servicios Windows',
-    'Integración con TMS/WMS',
-    'Reporting y exportación a Excel'
+    'Entity Framework',
+    'Cámara LPR Quercus (SmartLPR)',
+    'IIS · Windows Server',
+    'Exportación a Excel'
   ],
 
   results: [
-    'Visibilidad en tiempo real de la ocupación de muelles y del estado de cada camión en plataforma.',
-    'Reducción de tiempos muertos y colas en el patio gracias a la asignación automática de muelles y a los paneles visuales para el personal de tráfico.',
-    'Base histórica de datos robusta para análisis de productividad, dimensionamiento de recursos y negociación con clientes y transportistas.'
-  ]
+    'Un único panel web desde el que operadores y supervisores consultan el histórico de accesos de vehículos con filtros avanzados e imágenes asociadas.',
+    'Mayor control operativo al poder abrir la barrera, validar accesos especiales y gestionar matrículas autorizadas directamente desde la aplicación.',
+    'Reducción de tareas manuales y de consultas dispersas gracias a la centralización de la información en una interfaz web pensada para uso diario en la planta.'
+  ],
+
+  screenshot: 'assets/img/projects/matriculas-dashboard.png'
 },
 
+
     {
-  id: 'camara-lpr-events',
-  title: 'Servidor de eventos LPR y automatización de matrículas',
-  techBadge: '.NET · SQL Server · Docker · Python',
-  description:
-    'Servicio backend que recibe eventos en tiempo real de una cámara LPR, los normaliza y los persiste en SQL Server para usarlos en cuadros de mando y control de accesos.',
+      id: 'amb-sap-marcajes',
+      title: 'Servicios backend de marcajes para entorno SAP',
+      techBadge: '.NET · Windows Services · SAP · SQL Server',
+      description:
+        'Servicios backend en .NET que generan, transforman y envían marcajes de presencia desde el sistema de control de accesos a SAP para su gestión en RRHH.',
+      tags: ['Servicios Windows', 'Integración SAP', 'BioTime', 'Automatización'],
 
-  tags: ['LPR', 'HTTP Webhooks', 'Servicios Windows', 'Automatización'],
+      client: 'Operador público de transporte metropolitano con entorno SAP',
+      role: 'Backend & Integrations Developer',
+      period: '2024',
+      context:
+        'Integración entre un sistema de control de accesos/presencia (BioTime) y el módulo de RRHH en SAP para automatizar el alta diaria de marcajes de empleados.',
 
-  client: 'Planta industrial del sector metalúrgico',
-  role: 'Backend & Infra · LPR',
-  period: '2024 – 2025',
+      responsibilities: [
+        'Diseño del modelo de datos intermedio en SQL Server para almacenar y normalizar los marcajes provenientes de BioTime.',
+        'Desarrollo de servicios Windows en .NET que recogen los marcajes, aplican reglas de negocio y generan los ficheros/interfaz de entrada para SAP.',
+        'Implementación de reglas de mapeo entre tipos de marcaje (entrada, salida, incidencias) y los códigos de tiempo/ausencia definidos por RRHH en SAP.',
+        'Programación de tareas y jobs para la ejecución automática de los procesos en distintas franjas horarias.',
+        'Implementación de trazas y logs detallados para poder auditar cada envío y reprocesar incidencias cuando SAP rechaza algún registro.'
+      ],
 
-  context:
-    'La planta necesitaba registrar todas las matrículas que entran y salen (empleados, visitas y transportistas) desde una cámara LPR instalada en el acceso principal, generando un histórico fiable para cruzarlo con fichajes, accesos y logística.',
+      stack: [
+        '.NET Framework',
+        'C#',
+        'Servicios Windows',
+        'SQL Server',
+        'BioTime',
+        'SAP (RRHH)'
+      ],
 
-  responsibilities: [
-    'Diseño del modelo de datos en SQL Server para eventos LPR: matrícula, cámara, sentido, confianza, imagen asociada y metadatos de integración.',
-    'Desarrollo de un servicio Windows en C# que expone un pequeño servidor HTTP para recibir peticiones POST de la cámara LPR y confirmarlas en tiempo real.',
-    'Normalización y deserialización de los eventos JSON de la cámara (incluyendo URLs o binario de imagen) y persistencia en base de datos con control de duplicados.',
-    'Implementación de tareas de mantenimiento (purga de imágenes antiguas, archivado de históricos) usando scripts de automatización en Python.',
-    'Montaje de un entorno de desarrollo con Docker (SQL Server y herramientas auxiliares) para poder probar el servicio y los scripts sin afectar a producción.',
-    'Exposición de vistas y consultas preparadas para una futura web en Angular: timeline de matrículas, filtros por cámara/fecha y posibilidad de enlazar con fichajes o accesos físicos.',
-    'Monitorización básica mediante logs estructurados y contadores para detectar errores de comunicación con la cámara o problemas de rendimiento.'
-  ],
+      results: [
+        'Automatización del envío diario de marcajes desde el sistema de control de accesos a SAP.',
+        'Reducción significativa de la carga manual de introducción de fichajes por parte de RRHH.',
+        'Mayor trazabilidad y control de errores gracias a los logs y procesos de reintento implementados.'
+      ],
 
-  stack: [
-    'C# · .NET',
-    'Servicio Windows con HTTP Listener',
-    'SQL Server',
-    'Cámaras LPR (SmartLPR / similares)',
-    'Python (scripts de automatización)',
-    'Docker (entorno de desarrollo)',
-    'Windows Task Scheduler / jobs de mantenimiento'
-  ],
+      screenshot: 'assets/img/projects/amb-sap-marcajes.png'
+    },
 
-  results: [
-    'Canal estable para registrar eventos LPR en tiempo real sin depender todavía de una web completa.',
-    'Histórico de matrículas listo para cruzarse con fichajes, accesos y movimientos de vehículos en otros sistemas.',
-    'Menos tareas manuales de revisión gracias a los scripts de mantenimiento y a la consolidación de datos en una única base de datos.'
-  ]
-}
+    {
+      id: 'hipra-biostar-biotime',
+      title: 'Plataforma de integraciones BioStar / BioTime',
+      techBadge: '.NET · BioStar 2 · BioTime · SQL Server',
+      description:
+        'Servicios backend y procesos de integración para unificar el control de accesos físico y la presencia de empleados en un campus con decenas de puertas y edificios.',
+      tags: ['Control de accesos', 'Integraciones', 'Servicios Windows', 'Microservicios'],
 
+      client: 'Multinacional del sector farmacéutico y biotecnológico',
+      role: 'IT & Integrations · Access Control',
+      period: '2023 – 2024',
+      context:
+        'Entorno corporativo con múltiples sedes, cientos de lectores de control de accesos y distintos sistemas de presencia (BioStar 2, BioTime) que necesitaban consolidar la información.',
+
+      responsibilities: [
+        'Análisis de las BBDD de BioStar 2 y BioTime para entender el modelo de datos de usuarios, tarjetas, plantillas biométricas y logs de acceso.',
+        'Diseño y desarrollo de servicios Windows y microservicios .NET para sincronizar usuarios, tarjetas y grupos entre BioStar 2, BioTime y sistemas de RRHH.',
+        'Implementación de procesos programados que consolidan marcajes y generan vistas de presencia adaptadas a las reglas de negocio del cliente.',
+        'Optimización de consultas y procedimientos almacenados en SQL Server para trabajar con tablas de millones de registros de eventos.',
+        'Migraciones controladas de bases de datos y cambios de servidor garantizando la integridad de los datos y la mínima parada de servicio.',
+        'Instrumentación de logs detallados y alertas básicas para detectar incidencias de sincronización, caídas de servicios o dispositivos desconectados.'
+      ],
+
+      stack: [
+        'C# · .NET',
+        'Servicios Windows / microservicios',
+        'SQL Server',
+        'BioStar 2 API',
+        'BioTime'
+      ],
+
+      results: [
+        'Consolidación de los datos de accesos y presencia en un modelo único para reporting y auditoría.',
+        'Reducción de errores manuales en altas/bajas de usuarios y tarjetas gracias a las sincronizaciones automáticas.',
+        'Base técnica preparada para futuros cuadros de mando y análisis de seguridad física a nivel corporativo.'
+      ],
+
+      screenshot: 'assets/img/projects/hipra-biostar-biotime.png'
+    },
+
+    {
+      id: 'iese-visitas',
+      title: 'Aplicación de gestión de visitas y tarjetas de acceso',
+      techBadge: '.NET · WinForms · SQL Server',
+      description:
+        'Aplicación de escritorio y servicios backend para registrar visitas, emitir tarjetas temporales e integrarlas con el sistema de control de accesos del campus.',
+      tags: ['Aplicación de escritorio', 'Control de visitas', 'Accesos físicos'],
+
+      client: 'Escuela de negocios internacional',
+      role: 'Developer & Support · Access Control',
+      period: '2023 – 2024',
+      context:
+        'Centro educativo con varios edificios y zonas restringidas donde es necesario controlar quién entra, cuánto tiempo permanece y qué tipo de acreditación utiliza (visitas, proveedores, alumnos invitados, etc.).',
+
+      responsibilities: [
+        'Mantenimiento evolutivo de la aplicación WinForms de gestión de visitas, corrigiendo errores y añadiendo nuevas funcionalidades según las necesidades del departamento de seguridad.',
+        'Mejora de los flujos de alta de visitas: búsqueda rápida de contactos habituales, registro de vehículo, persona responsable y zona de acceso.',
+        'Desarrollo de lógica para la emisión y devolución de tarjetas temporales, vinculadas a las puertas y horarios permitidos.',
+        'Implementación de consultas y vistas SQL para facilitar listados de visitas, históricos y trazabilidad de accesos.',
+        'Apoyo en la integración con el sistema físico de control de accesos, validando que las visitas registradas en la aplicación puedan abrir únicamente las puertas autorizadas.',
+        'Soporte de segunda línea al personal de recepción y seguridad cuando aparecían incidencias relacionadas con visitas o tarjetas.'
+      ],
+
+      stack: [
+        'C# · .NET Framework',
+        'WinForms',
+        'SQL Server',
+        'Procedimientos almacenados y vistas',
+        'Integración con sistema de control de accesos'
+      ],
+
+      results: [
+        'Mayor trazabilidad de las visitas y de los movimientos dentro del campus gracias a un registro más completo y accesible.',
+        'Reducción de tareas manuales de recepción y seguridad en la gestión de tarjetas temporales.',
+        'Mejor alineación con las políticas de seguridad física y auditoría del centro.'
+      ],
+
+      screenshot: 'assets/img/projects/iese-visitas.png'
+    },
+
+    // ⭐ NUEVO PROYECTO: CONTROL DE PRESENCIA CON GEOLOCALIZACIÓN (sale en portada)
+    {
+      id: 'control-presencia-geolocalizacion',
+      title: 'Plataforma de control de presencia con geolocalización',
+      techBadge: 'ASP.NET Core · Angular · SQL Server · Geolocalización',
+      description:
+        'Aplicación web y API REST para registrar fichajes desde móvil y web, con geolocalización, control de horarios y panel avanzado de administración.',
+      tags: ['Full Stack', 'Control de presencia', 'Geolocalización', 'Web & API'],
+
+      client: 'Proyecto propio orientado a pymes y equipos en movilidad',
+      role: 'Full Stack .NET & Angular',
+      period: '2023 – 2024',
+      context:
+        'Desarrollo de una solución propia de control de presencia pensada para equipos que trabajan fuera de oficina (comerciales, técnicos, repartidores) con fichajes geolocalizados, validación de ubicación y superadministración multiempresa.',
+
+      responsibilities: [
+        'Diseño del modelo de datos en SQL Server para empresas, centros de trabajo, usuarios, horarios, turnos y marcajes geolocalizados.',
+        'Implementación de una API REST en ASP.NET Core para gestionar login, registro de fichajes, coordenadas GPS, incidencias y gestión de permisos.',
+        'Desarrollo del frontal en Angular con login, recuperación de contraseña, distintos roles (empleado, administrador, superadministrador) y paneles de control.',
+        'Módulo de superadministrador para alta de empresas, configuración de centros, horarios, políticas de fichaje y gestión de usuarios.',
+        'Validación de fichajes mediante geolocalización (radio permitido respecto al centro de trabajo) y registro de posibles incidencias o fichajes fuera de zona.',
+        'Exportación de datos de presencia a Excel/CSV para uso por parte de RRHH y asesorías laborales.',
+        'Configuración de despliegue en IIS/Windows Server y parametrización de entornos (producción / pruebas) mediante variables de configuración.'
+      ],
+
+      stack: [
+        'C# · ASP.NET Core Web API',
+        'Angular',
+        'SQL Server',
+        'Entity Framework Core',
+        'Autenticación JWT',
+        'Mapas / geolocalización (API de mapas)',
+        'IIS · Windows Server'
+      ],
+
+      results: [
+        'Visibilidad en tiempo real de qué empleados están fichados, desde dónde y en qué horario.',
+        'Reducción de la carga manual de consolidar fichajes procedentes de diferentes fuentes y plantillas.',
+        'Base técnica preparada para evolucionar la solución hacia un modelo SaaS multiempresa.'
+      ],
+
+      screenshot: 'assets/img/projects/control-presencia-geolocalizacion.jpg'
+    },
+
+    // Servidor de eventos LPR (sigue en el top 6)
+    {
+      id: 'lpr-events-server',
+      title: 'Servidor de eventos LPR y automatización de matrículas',
+      techBadge: '.NET · SQL Server · Docker · Python',
+      description:
+        'Servicio backend que recibe eventos en tiempo real de una cámara LPR, los normaliza y los persiste en SQL Server para usarlos en cuadros de mando y control de accesos.',
+
+      tags: ['LPR', 'HTTP Webhooks', 'Servicios Windows', 'Automatización'],
+
+      client: 'Planta industrial del sector metalúrgico',
+      role: 'Backend & Infra · LPR',
+      period: '2024 – 2025',
+      context:
+        'La planta necesitaba registrar todas las matrículas que entran y salen (empleados, visitas y transportistas) desde una cámara LPR instalada en el acceso principal, generando un histórico fiable para cruzarlo con fichajes, accesos y logística.',
+
+      responsibilities: [
+        'Diseño del modelo de datos en SQL Server para eventos LPR: matrícula, cámara, sentido, confianza, imagen asociada y metadatos de integración.',
+        'Desarrollo de un servicio Windows en C# que expone un pequeño servidor HTTP para recibir peticiones POST de la cámara LPR y confirmarlas en tiempo real.',
+        'Normalización y deserialización de los eventos JSON de la cámara (incluyendo URLs o binario de imagen) y persistencia en base de datos con control de duplicados.',
+        'Implementación de tareas de mantenimiento (purga de imágenes antiguas, archivado de históricos) usando scripts de automatización en Python.',
+        'Montaje de un entorno de desarrollo con Docker (SQL Server y herramientas auxiliares) para poder probar el servicio y los scripts sin afectar a producción.',
+        'Exposición de vistas y consultas preparadas para una futura web en Angular: timeline de matrículas, filtros por cámara/fecha y posibilidad de enlazar con fichajes o accesos físicos.',
+        'Monitorización básica mediante logs estructurados y contadores para detectar errores de comunicación con la cámara o problemas de rendimiento.'
+      ],
+
+      stack: [
+        'C# · .NET',
+        'Servicio Windows con HTTP Listener',
+        'SQL Server',
+        'Cámaras LPR (SmartLPR / similares)',
+        'Python (scripts de automatización)',
+        'Docker (entorno de desarrollo)',
+        'Windows Task Scheduler / jobs de mantenimiento'
+      ],
+
+      results: [
+        'Canal estable para registrar eventos LPR en tiempo real sin depender todavía de una web completa.',
+        'Histórico de matrículas listo para cruzarse con fichajes, accesos y movimientos de vehículos en otros sistemas.',
+        'Menos tareas manuales de revisión gracias a los scripts de mantenimiento y a la consolidación de datos en una única base de datos.'
+      ],
+
+      screenshot: 'assets/img/projects/lpr-events-server.png'
+    },
+
+    // 🟡 PROYECTO DE MUELLES – AHORA EL 7º (solo en "Ver todos los proyectos")
+    {
+      id: 'muelles-plataforma-logistica',
+      title: 'Plataforma de gestión de muelles y flota de reparto',
+      techBadge: '.NET · WinForms · SQL Server',
+      description:
+        'Suite interna para planificar la ocupación de muelles, asignar camiones y controlar en tiempo real el estado de carga y descarga en una plataforma logística de paquetería.',
+      tags: ['Logística', 'Planning de muelles', 'Aplicación de escritorio'],
+
+      client: 'Operador logístico internacional de paquetería',
+      role: 'Full Stack · Backend & Desktop',
+      period: '2024 – Actualidad',
+      context:
+        'Centro de cross-docking con múltiples muelles, rutas y turnos donde era necesario saber en cada momento qué camión está en cada puerta, cuánto tiempo lleva en muelle y si cumple las ventanas de carga pactadas.',
+
+      responsibilities: [
+        'Diseño del modelo de datos en SQL Server para muelles, camiones, rutas, slots horarios, incidencias y métricas operativas.',
+        'Desarrollo de una aplicación WinForms para el equipo de almacén con vistas configurables: panel de muelles, cola de llegada de camiones, timeline de ventanas horarias y estado de carga/descarga.',
+        'Implementación de lógica backend en .NET para la asignación automática de muelles en función de ruta, tipo de mercancía, prioridad y SLA de entrega.',
+        'Creación de servicios Windows y tareas programadas para importar y consolidar datos desde sistemas externos (TMS/WMS) y desde el sistema de control de accesos de la nave.',
+        'Construcción de informes operativos y exportaciones a Excel sobre tiempos de estancia, uso de muelles, puntualidad y productividad por turno.',
+        'Soporte a operación en directo (turnos de mañana y noche), analizando logs, corrigiendo datos y afinando reglas de negocio según feedback del personal de muelle.'
+      ],
+
+      stack: [
+        'C# · .NET Framework',
+        'WinForms',
+        'SQL Server',
+        'Servicios Windows',
+        'Integración con TMS/WMS',
+        'Reporting y exportación a Excel'
+      ],
+
+      results: [
+        'Visibilidad en tiempo real de la ocupación de muelles y del estado de cada camión en plataforma.',
+        'Reducción de tiempos muertos y colas en el patio gracias a la asignación automática de muelles y a los paneles visuales para el personal de tráfico.',
+        'Base histórica de datos robusta para análisis de productividad, dimensionamiento de recursos y negociación con clientes y transportistas.'
+      ],
+
+      screenshot: 'assets/img/projects/muelles-plataforma-logistica.png'
+    }
   ];
+
 
   get featuredProjects(): Project[] {
     return this.projects.slice(0, 6);
@@ -385,6 +487,9 @@ export class AppComponent implements OnInit, OnDestroy {
   en: ', with a strong background in systems and infrastructure. I design, build and run end-to-end solutions that bring together .NET backends, Angular frontends, databases, Windows services, access control, LPR and security.',
 },
 
+    
+
+
     'hero.downloadCv': {
       es: 'Descargar CV',
       ca: 'Descarregar CV',
@@ -445,10 +550,10 @@ export class AppComponent implements OnInit, OnDestroy {
       en: 'Specialisation',
     },
     'summary.specialtyBody': {
-      es: 'Integraciones BioStar / BioTime · Entra ID · servicios Windows',
-      ca: 'Integracions BioStar / BioTime · Entra ID · serveis Windows',
-      en: 'BioStar / BioTime integrations · Entra ID · Windows services',
-    },
+  es: 'Hago que cámaras LPR, tornos y lectores hablen .NET, SQL Server y Angular.',
+  ca: 'Faig que càmeres LPR, torns i lectors parlin .NET, SQL Server i Angular.',
+  en: 'I make LPR cameras, turnstiles and readers speak .NET, SQL Server and Angular.',
+},
 
     // SOBRE MÍ
     'about.p1': {
@@ -478,7 +583,7 @@ export class AppComponent implements OnInit, OnDestroy {
       en: 'Location',
     },
     'about.quick.locationValue': {
-      es: 'Catalunya · España',
+      es: 'Cataluña · España',
       ca: 'Catalunya · Espanya',
       en: 'Catalonia · Spain',
     },
@@ -590,10 +695,11 @@ export class AppComponent implements OnInit, OnDestroy {
       en: 'Systems, networking, security and services that complement my developer profile.',
     },
     'about.studies.asir.progress': {
-      es: 'En curso',
-      ca: 'Actualment en curs',
-      en: 'Currently taking',
-    },
+  es: 'En curso',
+  ca: 'Actualment en curs',
+  en: 'In progress',
+},
+
 
     // 🔐 Curso reciente de ciberseguridad
     'about.studies.cyber.title': {
@@ -661,8 +767,8 @@ export class AppComponent implements OnInit, OnDestroy {
     },
 
     'exp.mm.title': {
-      es: 'MediaMarkt · Especialista informática & SAT',
-      ca: 'MediaMarkt · Especialista informàtica & SAT',
+      es: 'MediaMarkt · Sales & IT Technician',
+      ca: 'MediaMarkt · Sales & IT Technician',
       en: 'MediaMarkt · IT Specialist & Service',
     },
     'exp.mm.subtitle': {
@@ -794,10 +900,11 @@ export class AppComponent implements OnInit, OnDestroy {
       en: 'End-to-end project management',
     },
     'skills.projects.b1': {
-      es: 'Reuniones con cliente para entender procesos, dolores y objetivos.',
-      ca: 'Reunions amb el client per entendre processos, pains i objectius.',
-      en: 'Client meetings to understand processes, pain points and goals.',
-    },
+  es: 'Reuniones con cliente para entender procesos, problemas y objetivos.',
+  ca: 'Reunions amb el client per entendre processos, problemes i objectius.',
+  en: 'Client meetings to understand processes, challenges and goals.',
+},
+
     'skills.projects.b2': {
       es: 'Traducción de las necesidades a requisitos técnicos y backlog de tareas.',
       ca: 'Traducció de les necessitats a requisits tècnics i backlog de tasques.',
@@ -820,10 +927,11 @@ export class AppComponent implements OnInit, OnDestroy {
       en: 'Visual Studio, VS Code, SQL Server Management Studio.',
     },
     'skills.tools.b2': {
-      es: 'GitHub, Docker (básico), scriptado con PowerShell y bash.',
-      ca: 'GitHub, Docker (bàsic), scripting amb PowerShell i bash.',
-      en: 'GitHub, basic Docker, scripting with PowerShell and bash.',
-    },
+  es: 'GitHub, Docker (básico) y scripts con PowerShell y bash.',
+  ca: 'GitHub, Docker (bàsic) i scripts amb PowerShell i bash.',
+  en: 'GitHub, basic Docker, scripting with PowerShell and bash.',
+},
+
     'skills.tools.b3': {
       es: 'Trabajo con APIs de terceros: BioStar 2, BioTime, VisualTime, cámaras LPR, etc.',
       ca: 'Treball amb APIs de tercers: BioStar 2, BioTime, VisualTime, càmeres LPR, etc.',
@@ -869,10 +977,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // PROYECTOS
     'projects.subtitle': {
-      es: 'Trabajo real en producción y proyectos personales relacionados con control de accesos e integraciones con APIs.',
-      ca: 'Treball real en producció i projectes personals relacionats amb control d’accessos e integracions amb APIs.',
-      en: 'Real production work and personal projects around access control and APIs integration.',
-    },
+  es: 'Trabajo real en producción y proyectos personales relacionados con control de accesos e integraciones con APIs. Algunas capturas son reales y otras son composiciones inspiradas en los proyectos originales para preservar la confidencialidad.',
+  ca: 'Treball real en producció i projectes personals relacionats amb control d’accessos i integracions amb APIs. Algunes captures són reals i d’altres són composicions inspirades en els projectes originals per preservar la confidencialitat.',
+  en: 'Real production work and personal projects around access control and API integrations. Some screenshots are real and others are illustrative mockups to preserve client confidentiality.',
+},
+
     'projects.viewAll': {
       es: 'Ver todos los proyectos',
       ca: 'Veure tots els projectes',
@@ -934,7 +1043,7 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     'contact.summary.l2': {
       es: 'Experiencia en control de accesos, APIs y páginas web Responsive',
-      ca: 'Experiència en control d’accessos, APIs i pagines web Responsive',
+      ca: 'Experiència en control d’accessos, APIs i pàgines web Responsive',
       en: 'Experience in access control, APIs and Responsive Websites',
     },
     'contact.summary.l3': {
@@ -1139,13 +1248,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   closeProject(): void {
-    this.isProjectModalOpen = false;
-    this.selectedProject = null;
+  this.isProjectModalOpen = false;
+  this.selectedProject = null;
 
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = '';
+    const el = document.getElementById('projects');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+}
 
   viewAllProjects(): void {
     this.showAllProjects = true;

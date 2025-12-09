@@ -272,6 +272,8 @@
           </div>        
         </div>
 
+        
+
         <!-- Lado derecho: foto 3D (solo VERTICALES) -->
         <div
           class="relative group mt-4 md:mt-0"
@@ -366,7 +368,7 @@
           <p>{{ t('summary.roleBody') }}</p>
         </div>
         <div
-          class="rounded-2xl border px-4 py-3 text-xs transition-colors duración-300"
+          class="rounded-2xl border px-4 py-3 text-xs transition-colors duration-300"
           [ngClass]="{
             'border-slate-800 bg-slate-900/60 text-slate-300': isDark,
             'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
@@ -379,6 +381,10 @@
         </div>
       </div>
     </section>
+
+       
+
+
 
     <!-- SOBRE MÍ -->
     <section id="about" appAos class="py-16 border-t border-slate-800/70">
@@ -774,7 +780,7 @@
 
     <!-- Soporte IT -->
     <div
-      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duración-300"
+      class="relative rounded-2xl border p-4 overflow-hidden group transition-all duration-300"
       [ngClass]="{
         'border-slate-800 bg-slate-950/70 text-slate-300': isDark,
         'border-slate-200 bg-white/80 text-slate-700 shadow-sm': !isDark
@@ -854,7 +860,7 @@
   <!-- CARD DE CERTIFICACIONES A ANCHO COMPLETO -->
 <div class="mt-10">
   <div
-    class="relative w-full rounded-2xl border p-5 sm:p-6 overflow-hidden group transition-all duración-300"
+    class="relative w-full rounded-2xl border p-5 sm:p-6 overflow-hidden group transition-all duration-300"
     [ngClass]="{
       'border-slate-800 bg-slate-950/80 text-slate-200': isDark,
       'border-slate-200 bg-white/90 text-slate-700 shadow-sm': !isDark
@@ -1249,7 +1255,14 @@
           'border-slate-200 bg-white': !isDark
         }"
         (click)="$event.stopPropagation()"
+             >
+             <button
+        type="button"
+        class="absolute top-3 right-3 z-10 rounded-full bg-slate-900/90 border border-slate-600 text-[11px] px-3 py-1 text-slate-100 hover:border-cyan-400 hover:text-cyan-300 shadow-lg"
+        (click)="closeProject()"
       >
+        {{ t('modal.project.close') }} ✕
+      </button>
         <!-- Columna izquierda: texto -->
         <div class="p-5 sm:p-6 flex flex-col gap-4 overflow-y-auto modal-body-scroll">
           <div class="flex items-start justify-between gap-3">
