@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AosElementDirective } from './aos-element.directive';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 type LangCode = 'es' | 'ca' | 'en';
 
@@ -29,10 +30,22 @@ interface WideImage {
 
 interface TechLogo {
   id: string;
-  name: string;
-  img: string;
+  label: string;
+  src: string;
 }
 
+
+interface TechItem {
+  id: string;
+  label: string;
+  src: string;
+}
+
+type Tech = {
+  label: string;
+  icon: string;   // ruta en assets
+  alt: string;
+};
 
 @Component({
   selector: 'app-root',
@@ -98,13 +111,35 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
     techLogos = [
-    { id: 'csharp', src: 'assets/img/logos/csharp.png', label: 'C# / .NET' },
+    { id: 'csharp', src: 'assets/img/logos/csharp-dotnet.png', label: 'C# / .NET' },
     { id: 'angular', src: 'assets/img/logos/angular.png', label: 'Angular' },
     { id: 'sqlserver', src: 'assets/img/logos/sqlserver.png', label: 'SQL Server' },
     { id: 'visualstudio', src: 'assets/img/logos/visual-studio.png', label: 'Visual Studio' },
     { id: 'github', src: 'assets/img/logos/github.png', label: 'GitHub' },
     { id: 'docker', src: 'assets/img/logos/docker.png', label: 'Docker' },
   ];
+
+  primaryTech: TechLogo[] = [
+  { id: 'dotnet',    label: '.NET',       src: 'assets/img/tech/dotnet.png' },
+  { id: 'csharp',    label: 'C#',         src: 'assets/img/tech/csharp.png' },
+  { id: 'angular',   label: 'Angular',    src: 'assets/img/tech/angular.png' },
+  { id: 'sqlserver', label: 'SQL Server', src: 'assets/img/tech/sqlserver.png' },
+  { id: 'docker',    label: 'Docker',     src: 'assets/img/tech/docker.png' },
+  { id: 'github',    label: 'GitHub',     src: 'assets/img/tech/github.png' },
+];
+
+altTech: TechLogo[] = [
+  { id: 'springboot', label: 'Spring Boot', src: 'assets/img/tech/springboot.png' },
+  { id: 'java',       label: 'Java',        src: 'assets/img/tech/java.png' },
+  { id: 'postgresql', label: 'PostgreSQL',  src: 'assets/img/tech/postgresql.png' },
+  { id: 'python',     label: 'Python',      src: 'assets/img/tech/python.png' },
+  { id: 'fastapi',    label: 'FastAPI',     src: 'assets/img/tech/fastapi.png' },
+];
+
+trackByTechId = (_: number, item: TechLogo) => item.id;
+
+
+
 
 
 
@@ -554,6 +589,21 @@ export class AppComponent implements OnInit, OnDestroy {
   ca: 'Faig que càmeres LPR, torns i lectors parlin .NET, SQL Server i Angular.',
   en: 'I make LPR cameras, turnstiles and readers speak .NET, SQL Server and Angular.',
 },
+
+'stack.title': { es: 'Stack principal', ca: 'Stack principal', en: 'Main stack' },
+'stack.subtitle': {
+  es: 'Tecnologías con las que trabajo a diario y stacks alternativos con los que también desarrollo proyectos funcionales.',
+  ca: 'Tecnologies amb què treballo cada dia i stacks alternatius amb què també desenvolupo projectes funcionals.',
+  en: 'Technologies I use daily, plus alternative stacks I can also deliver functional projects with.',
+},
+'stack.primary': { es: 'Mi stack principal', ca: 'El meu stack principal', en: 'My primary stack' },
+'stack.secondary': { es: 'También desarrollo con', ca: 'També desenvolupo amb', en: 'I also build with' },
+'stack.secondaryHint': {
+  es: 'Proyectos reales con Spring Boot (Java + PostgreSQL) y Python (FastAPI).',
+  ca: 'Projectes reals amb Spring Boot (Java + PostgreSQL) i Python (FastAPI).',
+  en: 'Real projects with Spring Boot (Java + PostgreSQL) and Python (FastAPI).',
+},
+
 
     // SOBRE MÍ
     'about.p1': {

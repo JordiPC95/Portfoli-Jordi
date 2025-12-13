@@ -25,7 +25,7 @@
 
   <!-- NAVBAR -->
   <header
-    class="sticky top-0 z-30 backdrop-blur-xl border-b transition-colors duration-300"
+    class="sticky top-0 z-30 backdrop-blur-xl border-b transition-colors duration-300" 
     [ngClass]="{
       'border-slate-800/60 bg-slate-950/70': isDark,
       'border-slate-200/80 bg-white/75 shadow-sm': !isDark
@@ -287,15 +287,15 @@
 
           <!-- Marco -->
           <div
-  class="relative overflow-hidden rounded-3xl border shadow-xl transition-transform duration-300 hero-card hero-glow"
-  [ngClass]="{
-    'border-slate-700 bg-slate-900/80': isDark,
-    'border-slate-200 bg-slate-900': !isDark
-  }"
-  [ngStyle]="{ transform: heroCardTransform }"
->
+              class="relative overflow-hidden rounded-3xl border shadow-xl transition-transform duration-300 hero-card hero-glow"
+               [ngClass]="{
+               'border-slate-700 bg-slate-900/80': isDark,
+                'border-slate-200 bg-slate-900': !isDark
+                }"
+                [ngStyle]="{ transform: heroCardTransform }"
+                  >
 
-            <!-- Chips sobre la imagen -->
+                <!-- Chips sobre la imagen -->
             <div
               class="absolute top-3 left-3 rounded-full bg-black/60 text-[10px] text-slate-100 px-3 py-1 flex items-center gap-1 backdrop-blur"
             >
@@ -381,8 +381,86 @@
         </div>
       </div>
     </section>
+    
 
-       
+     <!-- STACK PRINCIPAL -->
+<section id="stack" appAos class="py-14 border-t border-slate-800/70">
+  <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-2">
+    Stack principal
+  </h2>
+  <p class="text-sm sm:text-base text-slate-400 max-w-3xl">
+    Tecnologías con las que trabajo a diario y stacks alternativos con los que también desarrollo proyectos funcionales.
+  </p>
+
+  <div class="mt-6 grid gap-5 md:grid-cols-2">
+    <!-- CARD: STACK PRINCIPAL -->
+    <div
+      class="relative rounded-3xl border p-6 sm:p-7 overflow-hidden"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70': isDark,
+        'border-slate-200 bg-white/85 shadow-sm': !isDark
+      }"
+    >
+      <div class="pointer-events-none absolute inset-px rounded-3xl bg-gradient-to-br from-cyan-500/10 via-sky-500/5 to-emerald-500/10"></div>
+
+      <div class="relative">
+        <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-4">
+          Mi stack principal
+        </p>
+
+        <ul class="flex flex-wrap gap-3">
+          <li
+  *ngFor="let tech of primaryTech; trackBy: trackByTechId"
+  class="tech-pill border"
+  [ngClass]="{
+    'border-slate-700/80 bg-slate-900/60 text-slate-100': isDark,
+    'border-slate-300 bg-white text-slate-900': !isDark
+  }"
+>
+  <span class="tech-pill__icon">
+    <img [src]="tech.src" [alt]="tech.label" class="tech-pill__img" />
+  </span>
+  <span class="tech-pill__text">{{ tech.label }}</span>
+</li>
+
+              </ul>
+             </div>
+    </div>
+
+    <!-- CARD: STACKS ALTERNATIVOS -->
+    <div
+      class="relative rounded-3xl border p-6 sm:p-7 overflow-hidden"
+      [ngClass]="{
+        'border-slate-800 bg-slate-950/70': isDark,
+        'border-slate-200 bg-white/85 shadow-sm': !isDark
+      }"
+    >
+      <div class="pointer-events-none absolute inset-px rounded-3xl bg-gradient-to-br from-violet-500/10 via-sky-500/5 to-cyan-500/10"></div>
+
+      <div class="relative">
+        <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+          También desarrollo con
+        </p>
+        
+
+        <ul class="flex flex-wrap gap-3">
+          <li
+            *ngFor="let tech of altTech; trackBy: trackByTechId"
+            class="tech-pill"
+            [ngClass]="{
+              'border-slate-700/80 bg-slate-900/60 text-slate-100': isDark,
+              'border-slate-300 bg-white text-slate-900': !isDark
+            }"
+          >
+            <img [src]="tech.src" [alt]="tech.label" class="tech-pill__img" />
+            <span class="tech-pill__text">{{ tech.label }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+  
 
 
 

@@ -1,3 +1,5 @@
+
+
 /* Tarjeta del hero (vertical) */
 /* Tarjeta del hero (vertical) */
 .hero-card {
@@ -212,3 +214,39 @@ iframe {
     animation: qrBreath 6s ease-in-out infinite;
   }
 }
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 9999px;
+  padding: 10px 14px;          /* más grande */
+  line-height: 1;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.tech-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(56, 189, 248, 0.20);
+}
+
+.tech-pill__img {
+  width: 24px;                 /* icono grande */
+  height: 24px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.tech-pill__text {
+  font-size: 8px;             /* texto grande */
+  font-weight: 400;
+}
+
+@media (min-width: 640px) {
+  .tech-pill { padding: 11px 16px; }
+  .tech-pill__img { width: 26px; height: 26px; }
+  .tech-pill__text { font-size: 15px; }
+}
+
